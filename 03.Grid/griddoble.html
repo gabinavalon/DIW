@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .contenedor{
+        display: grid;
+        grid-template-columns: 1fr 1fr 2fr;
+        grid-template-rows: auto auto;
+        padding: 10px;
+        grid-gap: 10px;
+        background-color: palegoldenrod;
+        color: white;
+    
+    }
+    
+    .item1{
+        background-color: mediumaquamarine;
+    }
+    .item2{
+        background-color: mediumorchid;
+    }
+    .item3{
+        background-color: mediumpurple;
+    }
+    .item4{
+        background-color: mediumspringgreen;
+    }
+    .item5{
+        background-color: mediumturquoise;
+    }
+    .item6{
+        background-color: mediumvioletred;
+    }
+
+    li:first-child{
+        color: gray;
+    }
+
+    .item1 li:last-child{
+        color: black;
+    }
+
+</style>
+<body>
+    <div class="contenedor">
+        <div class="item1">
+            <ul>
+                <li>Mandarina</li>
+                <li>Manzana</li>
+                <li>Plátano</li>
+                <li>Granada</li>
+                <li>Mango</li>
+            </ul>
+        </div>
+        <div class="item2">
+            <ul>
+                <li>Honda</li>
+                <li>Audi</li>
+                <li>Seat</li>
+                <li>Mercedes</li>
+                <li>Citroën</li>
+            </ul>
+        </div>
+        <div class="item3">
+            <ul>
+                <li>Windows</li>
+                <li>Linux</li>
+                <li>Android</li>
+                <li>Mac</li>
+                <li>Unix</li>
+            </ul>
+        </div>
+        <div class="item4">
+            <ul>
+                <li>Gato</li>
+                <li>Lechuza</li>
+                <li>Perro</li>
+                <li>Gallina</li>
+                <li>Zorro</li>
+            </ul>
+        </div>
+        <div class="item5">
+            <ul>
+                <li>HP</li>
+                <li>Intel</li>
+                <li>Xiaomi</li>
+                <li>Windows</li>
+                <li>Ndivia</li>
+            </ul> 
+        </div>
+        <div class="item6">
+            <ul>
+                <li>Croquetas</li>
+                <li>Sopa</li>
+                <li>Gachas</li>
+                <li>Cocido</li>
+                <li>Guacamole</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
