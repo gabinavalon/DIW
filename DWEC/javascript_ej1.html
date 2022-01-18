@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Petición nombre</title>
+</head>
+<body>
+   
+    <textarea name="persona" id="persona" cols="40" rows="10" placeholder="Introduce nombre apellidos y año de nacimiento..."></textarea>
+    <br>
+    <button id="btnMayus">Mayúsculas</button>
+    <button id="btnDes">Descomponer</button>
+    <button id="btnUsu">Crear usuario</button> <br>
+
+    <p id="respuestamayus"></p>
+    <p id="respuestadesc"></p>
+    <p id="respuestausu"></p>
+
+    <script>
+        
+
+        var mayus = document.getElementById("btnMayus");
+
+        mayus.addEventListener("click", function(){
+            var persona = document.getElementById("persona");
+            var respuestaMayus = document.getElementById("respuestamayus");
+            var mayusculas = persona.value.toString().toUpperCase();
+
+            respuestaMayus.innerHTML ="Cadena en mayúsculas: " + mayusculas;
+        });
+
+        var descomp = document.getElementById("btnDes");
+
+        descomp.addEventListener("click", function(){
+            var persona = document.getElementById("persona").value;
+            var respuestaDesc = document.getElementById("respuestadesc");
+            
+            let arr = persona.toString().split(' ');
+
+            respuestaDesc.innerHTML = "Nombre: " + arr[0] + "<br>" 
+            + "Primer Apellido: " + arr[1] + "<br>" 
+            + "Segundo apellido: " + arr[2] +"<br>" 
+            + "Año: " + arr[3] ;
+        });
+
+        var usuario = document.getElementById("btnUsu");
+
+        usuario.addEventListener("click", function(){
+            var persona = document.getElementById("persona").value;
+            var respuestaUsu = document.getElementById("respuestausu");
+            
+            let arr = persona.toString().split(' ');
+
+            let inicial = arr[0][0];
+            let apellido1 = arr[1];
+            let apellido2= arr[2][0];
+            let edad1 = arr[3][2];
+            let edad2 = arr[3][3];
+            
+            let usuariofinal = inicial+ apellido1+ apellido2 + edad1+ edad2;
+
+            respuestaUsu.innerHTML = "Nombre usuario: " +usuariofinal.toString().toLowerCase();
+        });
+
+    </script>
+
+</body>
+</html>
