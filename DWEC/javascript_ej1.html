@@ -1,70 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Petición nombre</title>
 </head>
+
 <body>
-   
-    <textarea name="persona" id="persona" cols="40" rows="10" placeholder="Introduce nombre apellidos y año de nacimiento..."></textarea>
+
+    <textarea name="persona" id="persona" cols="40" rows="10"
+        placeholder="Introduce nombre apellidos y año de nacimiento..."></textarea>
     <br>
     <button id="btnMayus">Mayúsculas</button>
     <button id="btnDes">Descomponer</button>
     <button id="btnUsu">Crear usuario</button> <br>
 
+    <button id="btnVocales">Vocales</button>
+    <button id="btnTam">Tamaño</button>
+    <button id="btnTam2">Tamaño Nombre</button>
+
+
     <p id="respuestamayus"></p>
     <p id="respuestadesc"></p>
     <p id="respuestausu"></p>
 
+    <p id="respuestaVocal"></p>
+    <p id="respuestaTam"></p>
+    <p id="respuestaTam2"></p>
+
     <script>
-        
+
 
         var mayus = document.getElementById("btnMayus");
 
-        mayus.addEventListener("click", function(){
+        mayus.addEventListener("click", function () {
             var persona = document.getElementById("persona");
             var respuestaMayus = document.getElementById("respuestamayus");
             var mayusculas = persona.value.toString().toUpperCase();
 
-            respuestaMayus.innerHTML ="Cadena en mayúsculas: " + mayusculas;
+            respuestaMayus.innerHTML = "Cadena en mayúsculas: " + mayusculas;
         });
 
         var descomp = document.getElementById("btnDes");
 
-        descomp.addEventListener("click", function(){
+        descomp.addEventListener("click", function () {
             var persona = document.getElementById("persona").value;
             var respuestaDesc = document.getElementById("respuestadesc");
-            
+
             let arr = persona.toString().split(' ');
 
-            respuestaDesc.innerHTML = "Nombre: " + arr[0] + "<br>" 
-            + "Primer Apellido: " + arr[1] + "<br>" 
-            + "Segundo apellido: " + arr[2] +"<br>" 
-            + "Año: " + arr[3] ;
+            respuestaDesc.innerHTML = "Nombre: " + arr[0] + "<br>"
+                + "Primer Apellido: " + arr[1] + "<br>"
+                + "Segundo apellido: " + arr[2] + "<br>"
+                + "Año: " + arr[3];
         });
 
         var usuario = document.getElementById("btnUsu");
 
-        usuario.addEventListener("click", function(){
+        usuario.addEventListener("click", function () {
             var persona = document.getElementById("persona").value;
             var respuestaUsu = document.getElementById("respuestausu");
-            
+
             let arr = persona.toString().split(' ');
 
             let inicial = arr[0][0];
             let apellido1 = arr[1];
-            let apellido2= arr[2][0];
+            let apellido2 = arr[2][0];
             let edad1 = arr[3][2];
             let edad2 = arr[3][3];
-            
-            let usuariofinal = inicial+ apellido1+ apellido2 + edad1+ edad2;
 
-            respuestaUsu.innerHTML = "Nombre usuario: " +usuariofinal.toString().toLowerCase();
+            let usuariofinal = inicial + apellido1 + apellido2 + edad1 + edad2;
+
+            respuestaUsu.innerHTML = "Nombre usuario: " + usuariofinal.toString().toLowerCase();
         });
 
+        var vocales = document.getElementById("btnVocales");
+
+        vocales.addEventListener("click", function () {
+
+            var persona = document.getElementById("persona").value;
+            var respuestaVocal = document.getElementById("respuestaVocal");
+
+            let arr = persona.toString();
+
+            var count = arr.match(/[aeiouáéíóú]/gi).length;
+
+            respuestaVocal.innerHTML = "Total vocales: " + count;
+        });
+
+        var tamano = document.getElementById("btnTam");
+
+        tamano.addEventListener("click", function () {
+
+            var persona = document.getElementById("persona").value;
+            var respuestaTam = document.getElementById("respuestaTam");
+
+            let arr = persona.toString();
+
+            var count = arr.length;
+
+            respuestaTam.innerHTML = "Longitud cadena: " + count;
+        });
+
+        var tamano2 = document.getElementById("btnTam2");
+
+        tamano2.addEventListener("click", function () {
+
+            var persona = document.getElementById("persona").value;
+            var respuestaTam2 = document.getElementById("respuestaTam2");
+
+            let arr = persona.toString().split(' ');
+
+            let inicial = arr[0];
+            let apellido1 = arr[1];
+            let apellido2 = arr[2];
+
+            let nombreApellidos = inicial +" "+ apellido1 +" "+ apellido2;
+
+            var count = nombreApellidos.length;
+
+            respuestaTam2.innerHTML = "Longitud Nombre y Apellidos: " + count;
+        });
     </script>
 
 </body>
+
 </html>
