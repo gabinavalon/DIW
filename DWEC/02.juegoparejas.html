@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego de Cartas</title>
+    <style>
+        .contenedor {
+            display: grid;
+            grid-template-columns: 140px 140px 140px 140px;
+            grid-template-rows: 200px 200px 200px;
+            grid-gap: 10px;
+justify-content: center;
+
+
+        }
+
+        .cartas {
+            border: black 1px solid;
+            background-image: url("dorso.jpg");
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+
+        .puntuacion {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="puntuacion">
+        <h4>Puntuación</h4> <input type="text" value="0" id="marcador" disabled>
+    </div>
+    <br>
+    <div class="contenedor">
+
+        <div class="cartas" id="carta1"></div>
+        <div class="cartas" id="carta2"></div>
+        <div class="cartas" id="carta3"></div>
+        <div class="cartas" id="carta4"></div>
+        <div class="cartas" id="carta5"></div>
+        <div class="cartas" id="carta6"></div>
+        <div class="cartas" id="carta7"></div>
+        <div class="cartas" id="carta8"></div>
+        <div class="cartas" id="carta9"></div>
+        <div class="cartas" id="carta10"></div>
+        <div class="cartas" id="carta11"></div>
+        <div class="cartas" id="carta12"></div>
+
+        <script>
+            let carta1 = document.getElementById('carta1');
+            let carta2 = document.getElementById('carta2');
+            let carta3 = document.getElementById('carta3');
+            let carta4 = document.getElementById('carta4');
+            let carta5 = document.getElementById('carta5');
+            let carta6 = document.getElementById('carta6');
+            let carta7 = document.getElementById('carta7');
+            let carta8 = document.getElementById('carta8');
+            let carta9 = document.getElementById('carta9');
+            let carta10 = document.getElementById('carta10');
+            let carta11 = document.getElementById('carta11');
+            let carta12 = document.getElementById('carta12');
+
+            let arrCartas = [carta1, carta2, carta3, carta4, carta5, carta6, carta7, carta8, carta9, carta10, carta11, carta12];
+
+            let marcador = document.getElementById('marcador');
+
+            let sel1 = '';
+            let sel2 = '';
+            let puntuacion = 0;
+
+            carta1.addEventListener('click', function () {
+                carta1.style.backgroundImage = "url(mtg1.jpg)";
+            });
+            carta5.addEventListener('click', function () {
+                carta5.style.backgroundImage = "url(mtg1.jpg)";
+            });
+
+
+            carta2.addEventListener('click', function () {
+                carta2.style.backgroundImage = "url(mtg2.jpg)";
+            });
+            carta7.addEventListener('click', function () {
+                carta7.style.backgroundImage = "url(mtg2.jpg)";
+            });
+
+            carta3.addEventListener('click', function () {
+                carta3.style.backgroundImage = "url(mtg3.jpg)";
+            });
+            carta12.addEventListener('click', function () {
+                carta12.style.backgroundImage = "url(mtg3.jpg)";
+            });
+
+            carta4.addEventListener('click', function () {
+                carta4.style.backgroundImage = "url(mtg4.jpg)";
+            });
+            carta10.addEventListener('click', function () {
+                carta10.style.backgroundImage = "url(mtg4.jpg)";
+            });
+
+            carta6.addEventListener('click', function () {
+                carta6.style.backgroundImage = "url(mtg5.jpg)";
+            });
+            carta11.addEventListener('click', function () {
+                carta11.style.backgroundImage = "url(mtg5.jpg)";
+            });
+
+            carta9.addEventListener('click', function () {
+                carta9.style.backgroundImage = "url(mtg6.jpg)";
+            });
+            carta8.addEventListener('click', function () {
+                carta8.style.backgroundImage = "url(mtg6.jpg)";
+            });
+
+
+            arrCartas.forEach(element => {
+
+
+
+
+                element.addEventListener('click', function comparar(e) {
+
+                    if (sel1 == '') {
+                        sel1 = e.target;
+
+                    } else {
+                        if (sel1 == e.target) {
+
+                        } else {
+                            sel2 = e.target;
+                            if (sel1.style.backgroundImage === sel2.style.backgroundImage) {
+
+                                sel1.removeEventListener('click', comparar);
+                                sel2.removeEventListener('click', comparar);
+
+                                sel1.style.visibility = 'inherit';
+                                sel1.style.visibility = 'inherit';
+                                sel1 = '';
+                                sel2 = '';
+                                puntuacion++;
+                                marcador.value = puntuacion;
+                                if (marcador.value == 6) {
+                                    alert("Has ganado máquina");
+                                    location.reload();
+                                }
+                            } else {
+                              
+                                setTimeout(() => {
+                                    if (sel1.style.visibility == 'inherit') {
+                                        sel2.style.backgroundImage = 'url(dorso.jpg)';
+                                    } else if (sel2.style.visibility == 'inherit') {
+                                        sel1.style.backgroundImage = 'url(dorso.jpg)';
+                                    } else {
+                                        sel1.style.backgroundImage = 'url(dorso.jpg)';
+                                        sel2.style.backgroundImage = 'url(dorso.jpg)';
+                                    }
+
+                                    sel1 = '';
+                                    sel2 = '';
+
+                                   
+                                }, 500);
+                                //TODO que no se pueda hacer nada mientras se muestran las dos 
+
+                            }
+                        }
+                    }
+
+                })
+            });
+
+
+
+        </script>
+    </div>
+</body>
+
+</html>
