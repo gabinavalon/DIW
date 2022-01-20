@@ -27,12 +27,42 @@
         .puntuacion {
             text-align: center;
         }
+
+        .puntuacion span {
+            font-weight: bolder;
+        }
+
+        .center {
+            margin-left: auto;
+            margin-right: auto;
+        }
     </style>
 </head>
 
 <body>
     <div class="puntuacion">
-        <h4>Puntuación</h4> <input type="text" value="0" id="marcador" disabled>
+
+        <div class="ranking" id="ranking">
+
+        </div>
+        Usuario: <span id="usu"></span>
+        <table class="center">
+            <tr>
+                <th>
+                    <h4>Puntuación</h4>
+                </th>
+                <th>
+                    <h4>Errores</h4>
+                </th>
+            </tr>
+            <tr>
+                <td><input type="text" value="0" id="marcador" disabled></td>
+                <td><input type="text" value="0" id="errores" disabled></td>
+            </tr>
+
+        </table>
+
+
     </div>
     <br>
     <div class="contenedor">
@@ -50,146 +80,182 @@
         <div class="cartas" id="carta11"></div>
         <div class="cartas" id="carta12"></div>
 
-        <script>
-            let carta1 = document.getElementById('carta1');
-            let carta2 = document.getElementById('carta2');
-            let carta3 = document.getElementById('carta3');
-            let carta4 = document.getElementById('carta4');
-            let carta5 = document.getElementById('carta5');
-            let carta6 = document.getElementById('carta6');
-            let carta7 = document.getElementById('carta7');
-            let carta8 = document.getElementById('carta8');
-            let carta9 = document.getElementById('carta9');
-            let carta10 = document.getElementById('carta10');
-            let carta11 = document.getElementById('carta11');
-            let carta12 = document.getElementById('carta12');
+    </div>
 
-            let arrCartas = [
-                carta1, carta2, carta3, carta4, carta5, carta6, 
-                carta7, carta8, carta9, carta10, carta11, carta12
-            ];
-            
-            let arrSrc = [
-            "url(mtg1.jpg)", "url(mtg2.jpg)", "url(mtg3.jpg)", 
-            "url(mtg4.jpg)", "url(mtg5.jpg)", "url(mtg6.jpg)", 
-            "url(mtg1.jpg)", "url(mtg2.jpg)", "url(mtg3.jpg)", 
+
+    <script>
+
+        let nomUsuario = document.getElementById('usu');
+        var usuario = prompt("Escribe tu nombre de usuario: ");
+        nomUsuario.innerHTML = usuario;
+    
+        window.addEventListener('load', function () {
+            arrSrc.sort(function () { return Math.random() - 0.5 });
+
+        });
+
+        let carta1 = document.getElementById('carta1');
+        let carta2 = document.getElementById('carta2');
+        let carta3 = document.getElementById('carta3');
+        let carta4 = document.getElementById('carta4');
+        let carta5 = document.getElementById('carta5');
+        let carta6 = document.getElementById('carta6');
+        let carta7 = document.getElementById('carta7');
+        let carta8 = document.getElementById('carta8');
+        let carta9 = document.getElementById('carta9');
+        let carta10 = document.getElementById('carta10');
+        let carta11 = document.getElementById('carta11');
+        let carta12 = document.getElementById('carta12');
+
+        let arrCartas = [
+            carta1, carta2, carta3, carta4, carta5, carta6,
+            carta7, carta8, carta9, carta10, carta11, carta12
+        ];
+
+        let arrSrc = [
+            "url(mtg1.jpg)", "url(mtg2.jpg)", "url(mtg3.jpg)",
+            "url(mtg4.jpg)", "url(mtg5.jpg)", "url(mtg6.jpg)",
+            "url(mtg1.jpg)", "url(mtg2.jpg)", "url(mtg3.jpg)",
             "url(mtg4.jpg)", "url(mtg5.jpg)", "url(mtg6.jpg)"
-            ];
-            let marcador = document.getElementById('marcador');
+        ];
+        let marcador = document.getElementById('marcador');
+        let errores = document.getElementById('errores');
 
-            let sel1 = '';
-            let sel2 = '';
-            let puntuacion = 0;
-
-            //Al cargar la página, movemos las posiciones del array de fondos para que cada vez se asigne una
-            window.addEventListener('load', function () {
-                arrSrc.sort(function () { return Math.random() - 0.5 });
-            });
+        let sel1 = '';
+        let sel2 = '';
+        let puntuacion = 0;
+        let contadorErr = 0;
 
 
-            arrCartas[0].addEventListener('click', function () {
-                arrCartas[0].style.backgroundImage = arrSrc[0];
-            });           
-            arrCartas[1].addEventListener('click', function () {
-                arrCartas[1].style.backgroundImage = arrSrc[1];
-            });
+        arrCartas[0].addEventListener('click', function () {
+            arrCartas[0].style.backgroundImage = arrSrc[0];
+        });
+        arrCartas[1].addEventListener('click', function () {
+            arrCartas[1].style.backgroundImage = arrSrc[1];
+        });
 
 
-            arrCartas[2].addEventListener('click', function () {
-                arrCartas[2].style.backgroundImage = arrSrc[2];
-            });
-            arrCartas[3].addEventListener('click', function () {
-                arrCartas[3].style.backgroundImage = arrSrc[3];
-            });
+        arrCartas[2].addEventListener('click', function () {
+            arrCartas[2].style.backgroundImage = arrSrc[2];
+        });
+        arrCartas[3].addEventListener('click', function () {
+            arrCartas[3].style.backgroundImage = arrSrc[3];
+        });
 
-            arrCartas[4].addEventListener('click', function () {
-                arrCartas[4].style.backgroundImage = arrSrc[4];
-            });
-            arrCartas[5].addEventListener('click', function () {
-                arrCartas[5].style.backgroundImage = arrSrc[5];
-            });
+        arrCartas[4].addEventListener('click', function () {
+            arrCartas[4].style.backgroundImage = arrSrc[4];
+        });
+        arrCartas[5].addEventListener('click', function () {
+            arrCartas[5].style.backgroundImage = arrSrc[5];
+        });
 
-            arrCartas[6].addEventListener('click', function () {
-                arrCartas[6].style.backgroundImage = arrSrc[6];
-            });
-            arrCartas[7].addEventListener('click', function () {
-                arrCartas[7].style.backgroundImage = arrSrc[7];
-            });
+        arrCartas[6].addEventListener('click', function () {
+            arrCartas[6].style.backgroundImage = arrSrc[6];
+        });
+        arrCartas[7].addEventListener('click', function () {
+            arrCartas[7].style.backgroundImage = arrSrc[7];
+        });
 
-            arrCartas[8].addEventListener('click', function () {
-                arrCartas[8].style.backgroundImage = arrSrc[8];
-            });
-            arrCartas[9].addEventListener('click', function () {
-                arrCartas[9].style.backgroundImage = arrSrc[9];
-            });
+        arrCartas[8].addEventListener('click', function () {
+            arrCartas[8].style.backgroundImage = arrSrc[8];
+        });
+        arrCartas[9].addEventListener('click', function () {
+            arrCartas[9].style.backgroundImage = arrSrc[9];
+        });
 
-            arrCartas[10].addEventListener('click', function () {
-                arrCartas[10].style.backgroundImage = arrSrc[10];
-            });
-            arrCartas[11].addEventListener('click', function () {
-                arrCartas[11].style.backgroundImage = arrSrc[11];
-            });
+        arrCartas[10].addEventListener('click', function () {
+            arrCartas[10].style.backgroundImage = arrSrc[10];
+        });
+        arrCartas[11].addEventListener('click', function () {
+            arrCartas[11].style.backgroundImage = arrSrc[11];
+        });
 
 
-            arrCartas.forEach(element => {
+        arrCartas.forEach(element => {
 
 
 
-                element.addEventListener('click', function comparar(e) {
+            element.addEventListener('click', function comparar(e) {
 
-                    if (sel1 == '') {
-                        sel1 = e.target;
+                if (sel1 == '') {
+                    sel1 = e.target;
+
+                } else {
+                    if (sel1 == e.target) {
 
                     } else {
-                        if (sel1 == e.target) {
+                        sel2 = e.target;
+                        if (sel1.style.backgroundImage === sel2.style.backgroundImage) {
 
+                            sel1.removeEventListener('click', comparar);
+                            sel2.removeEventListener('click', comparar);
+
+                            sel1.style.visibility = 'inherit';
+                            sel1.style.visibility = 'inherit';
+                            sel1 = '';
+                            sel2 = '';
+                            puntuacion++;
+                            marcador.value = puntuacion;
+                            if (marcador.value == 6) {
+                                alert("¡Has ganado! Errores: " + contadorErr);
+
+                                document.cookie
+
+                                location.reload();
+                            }
                         } else {
-                            sel2 = e.target;
-                            if (sel1.style.backgroundImage === sel2.style.backgroundImage) {
 
-                                sel1.removeEventListener('click', comparar);
-                                sel2.removeEventListener('click', comparar);
+                            setTimeout(() => {
+                                if (sel1.style.visibility == 'inherit') {
+                                    sel2.style.backgroundImage = 'url(dorso.jpg)';
+                                } else if (sel2.style.visibility == 'inherit') {
+                                    sel1.style.backgroundImage = 'url(dorso.jpg)';
+                                } else {
+                                    sel1.style.backgroundImage = 'url(dorso.jpg)';
+                                    sel2.style.backgroundImage = 'url(dorso.jpg)';
+                                }
 
-                                sel1.style.visibility = 'inherit';
-                                sel1.style.visibility = 'inherit';
                                 sel1 = '';
                                 sel2 = '';
-                                puntuacion++;
-                                marcador.value = puntuacion;
-                                if (marcador.value == 6) {
-                                    alert("Has ganado máquina");
-                                    location.reload();
-                                }
-                            } else {
 
-                                setTimeout(() => {
-                                    if (sel1.style.visibility == 'inherit') {
-                                        sel2.style.backgroundImage = 'url(dorso.jpg)';
-                                    } else if (sel2.style.visibility == 'inherit') {
-                                        sel1.style.backgroundImage = 'url(dorso.jpg)';
-                                    } else {
-                                        sel1.style.backgroundImage = 'url(dorso.jpg)';
-                                        sel2.style.backgroundImage = 'url(dorso.jpg)';
-                                    }
-
-                                    sel1 = '';
-                                    sel2 = '';
+                                contadorErr++;
+                                errores.value = contadorErr;
 
 
-                                }, 500);
-                                //TODO que no se pueda hacer nada mientras se muestran las dos 
+                            }, 500);
+                            //TODO que no se pueda hacer nada mientras se muestran las dos 
 
-                            }
                         }
                     }
+                }
 
-                })
-            });
+            })
+        });
 
 
+        function getCookie(name) {
+            var cookieArr = document.cookie.split(";");
 
-        </script>
-    </div>
+            for (var i = 0; i < cookieArr.length; i++) {
+                var cookiePair = cookieArr[i].split("=");
+
+                if (name == cookiePair[0].trim()) {
+
+                    return decodeURIComponent(cookiePair[1]);
+                }
+            }
+            return null;
+        }
+
+        function setCookie(cname, cvalue, exdays) {
+            const d = new Date();
+            d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+            let expires = "expires=" + d.toUTCString();
+            document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+        }
+
+    </script>
+
 </body>
 
 </html>
