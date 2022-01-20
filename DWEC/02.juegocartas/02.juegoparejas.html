@@ -9,10 +9,10 @@
     <style>
         .contenedor {
             display: grid;
-            grid-template-columns: 140px 140px 140px 140px;
+            grid-template-columns: 144px 144px 144px 144px;
             grid-template-rows: 200px 200px 200px;
             grid-gap: 10px;
-justify-content: center;
+            justify-content: center;
 
 
         }
@@ -64,60 +64,74 @@ justify-content: center;
             let carta11 = document.getElementById('carta11');
             let carta12 = document.getElementById('carta12');
 
-            let arrCartas = [carta1, carta2, carta3, carta4, carta5, carta6, carta7, carta8, carta9, carta10, carta11, carta12];
-
+            let arrCartas = [
+                carta1, carta2, carta3, carta4, carta5, carta6, 
+                carta7, carta8, carta9, carta10, carta11, carta12
+            ];
+            
+            let arrSrc = [
+            "url(mtg1.jpg)", "url(mtg2.jpg)", "url(mtg3.jpg)", 
+            "url(mtg4.jpg)", "url(mtg5.jpg)", "url(mtg6.jpg)", 
+            "url(mtg1.jpg)", "url(mtg2.jpg)", "url(mtg3.jpg)", 
+            "url(mtg4.jpg)", "url(mtg5.jpg)", "url(mtg6.jpg)"
+            ];
             let marcador = document.getElementById('marcador');
 
             let sel1 = '';
             let sel2 = '';
             let puntuacion = 0;
 
-            carta1.addEventListener('click', function () {
-                carta1.style.backgroundImage = "url(mtg1.jpg)";
-            });
-            carta5.addEventListener('click', function () {
-                carta5.style.backgroundImage = "url(mtg1.jpg)";
+            //Al cargar la página, movemos las posiciones del array de fondos para que cada vez se asigne una
+            window.addEventListener('load', function () {
+                arrSrc.sort(function () { return Math.random() - 0.5 });
             });
 
 
-            carta2.addEventListener('click', function () {
-                carta2.style.backgroundImage = "url(mtg2.jpg)";
-            });
-            carta7.addEventListener('click', function () {
-                carta7.style.backgroundImage = "url(mtg2.jpg)";
-            });
-
-            carta3.addEventListener('click', function () {
-                carta3.style.backgroundImage = "url(mtg3.jpg)";
-            });
-            carta12.addEventListener('click', function () {
-                carta12.style.backgroundImage = "url(mtg3.jpg)";
+            arrCartas[0].addEventListener('click', function () {
+                arrCartas[0].style.backgroundImage = arrSrc[0];
+            });           
+            arrCartas[1].addEventListener('click', function () {
+                arrCartas[1].style.backgroundImage = arrSrc[1];
             });
 
-            carta4.addEventListener('click', function () {
-                carta4.style.backgroundImage = "url(mtg4.jpg)";
+
+            arrCartas[2].addEventListener('click', function () {
+                arrCartas[2].style.backgroundImage = arrSrc[2];
             });
-            carta10.addEventListener('click', function () {
-                carta10.style.backgroundImage = "url(mtg4.jpg)";
+            arrCartas[3].addEventListener('click', function () {
+                arrCartas[3].style.backgroundImage = arrSrc[3];
             });
 
-            carta6.addEventListener('click', function () {
-                carta6.style.backgroundImage = "url(mtg5.jpg)";
+            arrCartas[4].addEventListener('click', function () {
+                arrCartas[4].style.backgroundImage = arrSrc[4];
             });
-            carta11.addEventListener('click', function () {
-                carta11.style.backgroundImage = "url(mtg5.jpg)";
+            arrCartas[5].addEventListener('click', function () {
+                arrCartas[5].style.backgroundImage = arrSrc[5];
             });
 
-            carta9.addEventListener('click', function () {
-                carta9.style.backgroundImage = "url(mtg6.jpg)";
+            arrCartas[6].addEventListener('click', function () {
+                arrCartas[6].style.backgroundImage = arrSrc[6];
             });
-            carta8.addEventListener('click', function () {
-                carta8.style.backgroundImage = "url(mtg6.jpg)";
+            arrCartas[7].addEventListener('click', function () {
+                arrCartas[7].style.backgroundImage = arrSrc[7];
+            });
+
+            arrCartas[8].addEventListener('click', function () {
+                arrCartas[8].style.backgroundImage = arrSrc[8];
+            });
+            arrCartas[9].addEventListener('click', function () {
+                arrCartas[9].style.backgroundImage = arrSrc[9];
+            });
+
+            arrCartas[10].addEventListener('click', function () {
+                arrCartas[10].style.backgroundImage = arrSrc[10];
+            });
+            arrCartas[11].addEventListener('click', function () {
+                arrCartas[11].style.backgroundImage = arrSrc[11];
             });
 
 
             arrCartas.forEach(element => {
-
 
 
 
@@ -147,7 +161,7 @@ justify-content: center;
                                     location.reload();
                                 }
                             } else {
-                              
+
                                 setTimeout(() => {
                                     if (sel1.style.visibility == 'inherit') {
                                         sel2.style.backgroundImage = 'url(dorso.jpg)';
@@ -161,7 +175,7 @@ justify-content: center;
                                     sel1 = '';
                                     sel2 = '';
 
-                                   
+
                                 }, 500);
                                 //TODO que no se pueda hacer nada mientras se muestran las dos 
 
