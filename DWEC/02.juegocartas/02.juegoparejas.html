@@ -5,9 +5,43 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Juego de Cartas</title>
+    <meta name="description"
+        content="Juego de cartas en el que debes emparejar cartas de MTG fallando lo menos posible">
+    <title>Parejas MTG</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+        integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="apple-touch-icon" sizes="57x57" href="favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="manifest" href="favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
     <style>
-        .contenedor {
+        @import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+
+
+        * {
+            font-family: 'Righteous', cursive;  
+        }
+
+   
+
+        .contenedorCartas {
             display: grid;
             grid-template-columns: 144px 144px 144px 144px;
             grid-template-rows: 200px 200px 200px;
@@ -18,69 +52,174 @@
         }
 
         .cartas {
-            border: black 1px solid;
+
             background-image: url("dorso.jpg");
             background-size: contain;
             background-repeat: no-repeat;
         }
 
-        .puntuacion {
+
+
+
+
+        header {
+            display: flex;
+            align-items: center;
             text-align: center;
+            border: 1px white solid;
+            height: 100px;
+            justify-content: center;
+
         }
 
-        .puntuacion span {
-            font-weight: bolder;
+        header img {
+
+            height: 100px;
         }
 
-        .center {
-            margin-left: auto;
-            margin-right: auto;
+        .tablas {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .tablas table{
+            height: 100px;
+        }
+
+        .mensajes{
+            text-align: center;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+
+        .juego{
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        .informacion{
+            width: 20%;
+            text-align: center;
+
+        }
+
+        .informacion::selection{
+            color: red;
+        }
+        .footer{
+            text-align: center;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
         }
     </style>
 </head>
 
 <body>
-    <div class="puntuacion">
+    <header>
+        <img src="favicon\android-icon-192x192.png" alt="logo">
+        <h1>Parejas MTG</h1>
+    </header>
+
+
+
+    <div class="tablas">
+        <div class="puntuacion">
+            <table>
+                <tr>
+                    <th rowspan="2">
+                        <span id="usu"></span>
+                    </th>
+                    <th>
+                        Puntuación
+                    </th>
+                    <th>
+                        <i class="fas fa-trophy"></i>
+                    </th>
+                    <th>
+                        Errores 
+                    </th>
+                    <th>
+                        <i class="fas fa-skull"></i>
+                    </th>
+                </tr>
+                <tr>
+                    <td colspan="2"><input type="text" value="0" id="marcador" disabled size="3"></td>
+                    <td colspan="2"><input type="text" value="0" id="errores" disabled size="3"></td>
+                </tr>
+
+            </table>
+        </div>
 
         <div class="ranking" id="ranking">
+            <table>
+                <tr>
+                    <th>Mejor jugadorx</th>
+                    <th>Errores</th>
+                </tr>
+                <tr>
+                    <td><input type="text" value="0" id="marcadorGanador" disabled size="3"></td>
+                    <td><input type="text" value="0" id="erroresGanador" disabled size="3"></td>
+
+                </tr>
+            </table>
 
         </div>
-        Usuario: <span id="usu"></span>
-        <table class="center">
-            <tr>
-                <th>
-                    <h4>Puntuación</h4>
-                </th>
-                <th>
-                    <h4>Errores</h4>
-                </th>
-            </tr>
-            <tr>
-                <td><input type="text" value="0" id="marcador" disabled></td>
-                <td><input type="text" value="0" id="errores" disabled></td>
-            </tr>
 
-        </table>
-
-
+        <div class="idioma">
+            <table>
+                <tr>
+                    <th colspan="2">Idioma</th>
+                </tr>
+                <tr>
+                    <td>ES</td>
+                    <td>EN</td>
+                </tr>
+            </table>
+        </div>
     </div>
-    <br>
-    <div class="contenedor">
 
-        <div class="cartas" id="carta1"></div>
-        <div class="cartas" id="carta2"></div>
-        <div class="cartas" id="carta3"></div>
-        <div class="cartas" id="carta4"></div>
-        <div class="cartas" id="carta5"></div>
-        <div class="cartas" id="carta6"></div>
-        <div class="cartas" id="carta7"></div>
-        <div class="cartas" id="carta8"></div>
-        <div class="cartas" id="carta9"></div>
-        <div class="cartas" id="carta10"></div>
-        <div class="cartas" id="carta11"></div>
-        <div class="cartas" id="carta12"></div>
+        <div class="mensajes">
+            Los mensajes van aquí
+        </div>
 
+        <div class="juego">
+
+     
+
+        <div class="contenedorCartas">
+
+            <div class="cartas" id="carta1"></div>
+            <div class="cartas" id="carta2"></div>
+            <div class="cartas" id="carta3"></div>
+            <div class="cartas" id="carta4"></div>
+            <div class="cartas" id="carta5"></div>
+            <div class="cartas" id="carta6"></div>
+            <div class="cartas" id="carta7"></div>
+            <div class="cartas" id="carta8"></div>
+            <div class="cartas" id="carta9"></div>
+            <div class="cartas" id="carta10"></div>
+            <div class="cartas" id="carta11"></div>
+            <div class="cartas" id="carta12"></div>
+
+        </div>
+
+        <div class="informacion">
+            Para jugar solo tienes que hacer click en cualquier carta para darle la vuelta. <br> <br>
+            Después, haz click en otra carta, si son iguales, habrás consegido un punto, 
+            si son distintas, volverán a darse la vuelta. <br><br>
+            ¡Tendrás que recordar su posición! <br><br>
+            El juego termina cuando emparejas todas las cartas. <br> <br>
+            ¡Intenta terminar con el menor número de fallos!
+        </div>
     </div>
+
+        <div class="footer">
+            Gabriel Navalón Soriano
+        </div>
 
 
     <script>
@@ -88,7 +227,7 @@
         let nomUsuario = document.getElementById('usu');
         var usuario = prompt("Escribe tu nombre de usuario: ");
         nomUsuario.innerHTML = usuario;
-    
+
         window.addEventListener('load', function () {
             arrSrc.sort(function () { return Math.random() - 0.5 });
 
