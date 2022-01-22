@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
         content="Juego de cartas en el que debes emparejar cartas de MTG fallando lo menos posible">
-    <title>Parejas MTG</title>
+    <title>Juego de Memoria MTG</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
         integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
@@ -36,10 +36,10 @@
 
 
         * {
-            font-family: 'Righteous', cursive;  
+            font-family: 'Righteous', cursive;
         }
 
-   
+
 
         .contenedorCartas {
             display: grid;
@@ -82,11 +82,11 @@
             justify-content: space-around;
         }
 
-        .tablas table{
+        .tablas table {
             height: 100px;
         }
 
-        .mensajes{
+        .mensajes {
             text-align: center;
             height: 50px;
             display: flex;
@@ -94,26 +94,33 @@
             justify-content: space-around;
         }
 
-        .juego{
+        .juego {
             display: flex;
             justify-content: space-around;
             align-items: center;
         }
-        .informacion{
+
+        .informacion {
             width: 20%;
             text-align: center;
 
         }
 
-        .informacion::selection{
+        .informacion::selection {
             color: red;
+            /**Este tipo de letra ya se encuentra en negrita por defecto por lo que no se puede poner en negrita*/  
         }
-        .footer{
+
+        .footer {
             text-align: center;
             height: 100px;
             display: flex;
             align-items: center;
             justify-content: space-around;
+        }
+
+        .invisible {
+            display: none;
         }
     </style>
 </head>
@@ -121,7 +128,8 @@
 <body>
     <header>
         <img src="favicon\android-icon-192x192.png" alt="logo">
-        <h1>Parejas MTG</h1>
+        <h1 class="ES">Juego de Memoria MTG</h1>
+        <h1 class="EN">MTG Memory Game</h1>
     </header>
 
 
@@ -133,14 +141,20 @@
                     <th rowspan="2">
                         <span id="usu"></span>
                     </th>
-                    <th>
+                    <th class="ES">
                         Puntuación
+                    </th>
+                    <th class="EN">
+                        Score
                     </th>
                     <th>
                         <i class="fas fa-trophy"></i>
                     </th>
-                    <th>
-                        Errores 
+                    <th class="ES">
+                        Errores
+                    </th>
+                    <th class="EN">
+                        Mistakes
                     </th>
                     <th>
                         <i class="fas fa-skull"></i>
@@ -157,12 +171,15 @@
         <div class="ranking" id="ranking">
             <table>
                 <tr>
-                    <th>Mejor jugadorx</th>
-                    <th>Errores</th>
+                    <th class="ES">Mejor jugadorx</th>
+                    <th class="EN">Best player</th>
+                    <th class="ES">Errores</th>
+                    <th class="EN">Mistakes</th>
                 </tr>
                 <tr>
-                    <td><input type="text" value="0" id="marcadorGanador" disabled size="3"></td>
-                    <td><input type="text" value="0" id="erroresGanador" disabled size="3"></td>
+                    <td id="winner" class="ES">Ganador</td>
+                    <td id="winner" class="EN">Winner</td>
+                    <td><input type="text" value="100" id="erroresGanador" disabled size="3"></td>
 
                 </tr>
             </table>
@@ -172,23 +189,28 @@
         <div class="idioma">
             <table>
                 <tr>
-                    <th colspan="2">Idioma</th>
+                    <th colspan="2" class="ES">Idioma</th>
+                    <th colspan="2" class="EN">Language</th>
                 </tr>
                 <tr>
-                    <td>ES</td>
-                    <td>EN</td>
+                    <td><button id="btnES">ES</button></td>
+
+                    <td><button id="btnEN">EN</button></td>
                 </tr>
             </table>
         </div>
     </div>
 
-        <div class="mensajes">
-            Los mensajes van aquí
-        </div>
+    <div class="mensajes ES" id="mensajesES">
+        (Los avisos irán aquí)
+    </div>
+    <div class="mensajes EN" id="mensajesEN">
+        (Alerts will appear here)
+    </div>
 
-        <div class="juego">
+    <div class="juego">
 
-     
+
 
         <div class="contenedorCartas">
 
@@ -207,19 +229,27 @@
 
         </div>
 
-        <div class="informacion">
+        <div class="informacion ES">
             Para jugar solo tienes que hacer click en cualquier carta para darle la vuelta. <br> <br>
-            Después, haz click en otra carta, si son iguales, habrás consegido un punto, 
+            Después, haz click en otra carta, si son iguales, habrás consegido un punto,
             si son distintas, volverán a darse la vuelta. <br><br>
             ¡Tendrás que recordar su posición! <br><br>
             El juego termina cuando emparejas todas las cartas. <br> <br>
             ¡Intenta terminar con el menor número de fallos!
         </div>
+        <div class="informacion EN">
+            To play, you have to click in any card to flip it <br> <br>
+            Then, you can click any other card, if both cards are the same, you will get a pint,
+            and if they are different, they wull flip again <br><br>
+            You have to remember their position! <br><br>
+            The game will end when you match all the cards. <br><br>
+            Try to finish with fewer mistakes as possible!
+        </div>
     </div>
 
-        <div class="footer">
-            Gabriel Navalón Soriano
-        </div>
+    <div class="footer">
+        Gabriel Navalón Soriano --- MTGMemoryGame
+    </div>
 
 
     <script>
@@ -228,11 +258,21 @@
         var usuario = prompt("Escribe tu nombre de usuario: ");
         nomUsuario.innerHTML = usuario;
 
+        let mensajes = document.getElementById('mensajesES');
+
+        var usuGanador = document.getElementById('winner');
+        var fallosGanador = document.getElementById('erroresGanador');
+
         window.addEventListener('load', function () {
             arrSrc.sort(function () { return Math.random() - 0.5 });
 
         });
 
+        if (getCookie('ganador')) {
+            let cganador = getCookie('ganador');
+
+            setGanador(cganador);
+        }
         let carta1 = document.getElementById('carta1');
         let carta2 = document.getElementById('carta2');
         let carta3 = document.getElementById('carta3');
@@ -257,6 +297,7 @@
             "url(mtg1.jpg)", "url(mtg2.jpg)", "url(mtg3.jpg)",
             "url(mtg4.jpg)", "url(mtg5.jpg)", "url(mtg6.jpg)"
         ];
+
         let marcador = document.getElementById('marcador');
         let errores = document.getElementById('errores');
 
@@ -265,50 +306,12 @@
         let puntuacion = 0;
         let contadorErr = 0;
 
-
-        arrCartas[0].addEventListener('click', function () {
-            arrCartas[0].style.backgroundImage = arrSrc[0];
-        });
-        arrCartas[1].addEventListener('click', function () {
-            arrCartas[1].style.backgroundImage = arrSrc[1];
-        });
-
-
-        arrCartas[2].addEventListener('click', function () {
-            arrCartas[2].style.backgroundImage = arrSrc[2];
-        });
-        arrCartas[3].addEventListener('click', function () {
-            arrCartas[3].style.backgroundImage = arrSrc[3];
-        });
-
-        arrCartas[4].addEventListener('click', function () {
-            arrCartas[4].style.backgroundImage = arrSrc[4];
-        });
-        arrCartas[5].addEventListener('click', function () {
-            arrCartas[5].style.backgroundImage = arrSrc[5];
-        });
-
-        arrCartas[6].addEventListener('click', function () {
-            arrCartas[6].style.backgroundImage = arrSrc[6];
-        });
-        arrCartas[7].addEventListener('click', function () {
-            arrCartas[7].style.backgroundImage = arrSrc[7];
-        });
-
-        arrCartas[8].addEventListener('click', function () {
-            arrCartas[8].style.backgroundImage = arrSrc[8];
-        });
-        arrCartas[9].addEventListener('click', function () {
-            arrCartas[9].style.backgroundImage = arrSrc[9];
-        });
-
-        arrCartas[10].addEventListener('click', function () {
-            arrCartas[10].style.backgroundImage = arrSrc[10];
-        });
-        arrCartas[11].addEventListener('click', function () {
-            arrCartas[11].style.backgroundImage = arrSrc[11];
-        });
-
+        for (let i = 0; i < arrCartas.length; i++) {
+            const carta = arrCartas[i];
+            carta.addEventListener('click', function () {
+                carta.style.backgroundImage = arrSrc[i];
+            })
+        }
 
         arrCartas.forEach(element => {
 
@@ -338,7 +341,10 @@
                             if (marcador.value == 6) {
                                 alert("¡Has ganado! Errores: " + contadorErr);
 
-                                document.cookie
+                                let usuarioErrores = (usuario + "&" + contadorErr);
+
+
+                                setCookie("ganador", usuarioErrores.toString(), 7);
 
                                 location.reload();
                             }
@@ -362,7 +368,6 @@
 
 
                             }, 500);
-                            //TODO que no se pueda hacer nada mientras se muestran las dos 
 
                         }
                     }
@@ -392,6 +397,92 @@
             let expires = "expires=" + d.toUTCString();
             document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
         }
+
+        function setGanador(c) {
+
+            var arrGanador = c.split('&');
+
+            var ultimoUsuario = arrGanador[0];
+            var ultimosFallos = arrGanador[1];
+
+            if (fallosGanador.value >= ultimosFallos) {
+                fallosGanador.value = ultimosFallos;
+                usuGanador.innerHTML = ultimoUsuario;
+
+            } else {
+
+            }
+
+            fallosGanador.value = ultimosFallos;
+            usuGanador.innerHTML = ultimoUsuario;
+
+        }
+
+        //Cambios de idioma
+
+        let btnES = document.getElementById('btnES');
+        let btnEN = document.getElementById('btnEN');
+
+        // Ponemos por defecto la página en Español
+        let idiomaActual = '';
+        let pagEN = document.getElementsByClassName("EN");
+        let pagES = document.getElementsByClassName("ES");
+   
+        for (i = 0; i <  pagEN.length; i++) {
+            pagEN[i].classList.add('invisible');
+        }
+
+        if (getCookie('idioma')== 'ES') {
+            idiomaES();
+        }
+
+        if (getCookie('idioma')== 'EN') {
+            idiomaEN();
+        }
+
+
+                btnES.addEventListener('click', idiomaES);
+        
+            
+                btnEN.addEventListener('click', idiomaEN);
+
+
+                function idiomaES(){
+                    if (idiomaActual == 'ES') {
+                        mensajes.innerHTML = 'La página ya se encuentra en Español';
+                    }else{
+                        for (i = 0; i <  pagEN.length; i++) {
+                        pagEN[i].classList.add('invisible');
+                        }
+                        for (i = 0; i <  pagES.length; i++) {
+                        pagES[i].classList.remove('invisible');
+                        }
+                        mensajes = document.getElementById('mensajesES');                          
+                        mensajes.innerHTML = 'Idioma: Español';
+                        setCookie('idioma', 'ES', 30);
+                        idiomaActual = "ES";
+                    }
+        
+                }
+
+                function idiomaEN(){
+                    if (idiomaActual == 'EN') {
+                        mensajes.innerHTML = 'This page already is in English';
+                    }else{
+                        for (i = 0; i <  pagEN.length; i++) {
+                        pagEN[i].classList.remove('invisible');
+                        }
+                        for (i = 0; i <  pagES.length; i++) {                      
+                        pagES[i].classList.add('invisible');
+                        }
+                        mensajes = document.getElementById('mensajesEN');                    
+                        mensajes.innerHTML = 'Language: English';
+                        setCookie('idioma', 'EN', 30);        
+                        idiomaActual = "EN";
+                    }
+        
+                }
+        
 
     </script>
 
