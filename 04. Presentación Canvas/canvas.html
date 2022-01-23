@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=, initial-scale=1.0" />
+    <title>Canvas</title>
+    <style>
+      .contenedor {
+        display: inline-flex;
+      }
+
+      .descripcion {
+        background-repeat: no-repeat;
+        background-size: contain;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Canvas</h1>
+    <h2>¿Qué es?</h2>
+    <div class="contenedor">
+      <canvas id="lienzo" width="500" height="300">
+        El navegador no soporta canvas
+      </canvas>
+      <div class="descripcion" id="descripcion" width="900" height="300">
+        <h3>Formas básicas</h3>
+        <button id="btnLn">Crear línea</button> <br />
+        <button id="btnCir">Crear círculo</button> <br />
+        <button id="btnText">Texto</button> <br />
+        <button id="btnGrad">Degradado de color</button> <br />
+        <button id="borrar">Borrar</button>
+      </div>
+    </div>
+    <p>
+      Es un elemento que permite crear gráficos, animaciones, e incluso
+      videojuegos mediante una API de JS
+    </p>
+    <b> Se escribe : &lt;canvas&gt; </b>
+
+    <div class="codigo">
+      <img src="" alt="" id="code" />
+    </div>
+
+    <script>
+      var ctx = null,
+        canvas = null;
+      var code = document.getElementById("code");
+      function iniciar() {
+        //Primero desde el DOM guardamos una variable con el lienzo
+        canvas = document.getElementById("lienzo");
+        // Después obtenemos el contexto sobre el que vamos a dibujar, en este caso, 2D
+        ctx = canvas.getContext("2d");
+      }
+      window.addEventListener("load", iniciar, false);
+
+      var btnLn = document.getElementById("btnLn");
+
+      btnLn.addEventListener("click", function () {
+        //Para dibujar una línea lo que hacemos es primero indicar el punto de inicio
+        //y después el desplazamiento que queremos que tenga
+        ctx.moveTo(0, 0);
+        ctx.lineTo(500, 300);
+        ctx.stroke();
+        code.src = "linea.png";
+      });
+
+      var btnCir = document.getElementById("btnCir");
+
+      btnCir.addEventListener("click", function () {
+        //ctx .arc (x, y, radio, anguloInicia, anguloFinal, antihorario);
+        ctx.beginPath();
+        ctx.arc(250, 150, 70, 0, 2 * Math.PI);
+        ctx.stroke();
+
+        code.src = "circle.png";
+      });
+
+      var btnText = document.getElementById("btnText");
+
+      btnText.addEventListener("click", function () {
+        //En font seleccionamos el tipo de fuente y el tamnaño y en fill text
+        // El texto y la posicion X Y de este
+
+        ctx.font = "40px Arial";
+        ctx.fillText("Hola Mundo", 10, 50);
+
+        code.src = "text.png";
+      });
+
+      var btnGrad = document.getElementById("btnGrad");
+
+      btnGrad.addEventListener("click", function () {
+        // Se crea el degradado, y después el color inicial y el final
+        // createLinearGradient(x0,y0,x1,y1);
+        var grd = ctx.createLinearGradient(0, 0, 500, 0);
+        grd.addColorStop(0, "purple");
+        grd.addColorStop(1, "white");
+
+        // Se pone el gradiente en el lienzo, como un rectángulo
+        ctx.fillStyle = grd;
+        ctx.fillRect(10, 10, 500, 300);
+        code.src = "degradado.png";
+      });
+
+      var borrar = document.getElementById("borrar");
+
+      borrar.addEventListener("click", function () {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        code.src = " ";
+      });
+    </script>
+  </body>
+</html>
