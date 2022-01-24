@@ -1,0 +1,20 @@
+En la primera página se juega con los enlaces, botones, 
+y colores de la fuente para ver como se puede avanzar.
+
+En la segunda página, donde ya empieza el formulario, se hace pasar el texto por placeholder, 
+teniendo que borrar para poder escribir. Combinación de colores al a hora de las selecciones 
+(rojo para confirmar, verde para rechazar), y al escribir la contraseña pide 
+muchas chorradas que además no verifica conforme las vas haciendo. 
+
+Ejerce presión sobre el usuario utilizando un reloj para las acciones que hace, 
+y que aparezca una ventana modal diciendo que te des prisa.
+
+Los input utilizados no son los adecuados, la selección de edad es con una barra de desplazamiento 
+(para elegir el código postal hay que avanzar de uno en uno, los meses de nacimiento salen por orden alfabético) 
+además de utilizar colores para no saber que estás seleccionando.
+
+A la hora de subir la imagen, el loader no deja de cargar, si le das a descargar te descarga la imagen inicial, 
+y los checkbox van marcados por defecto, además de poner los amrcar todos y desmarcar todos en posiciones aleatorias.
+
+El captcha final sencillamente es aterrador, hasta que te das cuenta de que tienes que marcarlo todos, 
+lo cual te quita otros dos valiosos minutos de tu vida.

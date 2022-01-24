@@ -337,12 +337,14 @@
                             sel1 = '';
                             sel2 = '';
                             puntuacion++;
+                            pagEN.innerHTML= "Nice!";
+                            pagES.innerHTML = "¡Muy bien!";
                             marcador.value = puntuacion;
                             if (marcador.value == 6) {
                                 alert("¡Has ganado! Errores: " + contadorErr);
 
                                 let usuarioErrores = (usuario + "&" + contadorErr);
-
+                                
 
                                 setCookie("ganador", usuarioErrores.toString(), 7);
 
@@ -362,6 +364,9 @@
 
                                 sel1 = '';
                                 sel2 = '';
+
+                                pagEN.innerHTML= "Fail! Try again";
+                                pagES.innerHTML = "¡Error! Prueba otra vez";
 
                                 contadorErr++;
                                 errores.value = contadorErr;
