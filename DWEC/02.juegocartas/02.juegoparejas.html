@@ -66,9 +66,6 @@
         }
 
 
-
-
-
         header {
             display: flex;
             align-items: center;
@@ -142,6 +139,7 @@
             padding-left: 30px;
             padding-right: 30px;
             border: 4px solid black;
+            overflow:auto;
 
         }
 
@@ -281,7 +279,13 @@
             si son distintas, volverán a darse la vuelta. <br><br>
             ¡Tendrás que recordar su posición! <br><br>
             El juego termina cuando emparejas todas las cartas. <br> <br>
-            ¡Intenta terminar con el menor número de fallos!
+            ¡Intenta terminar con el menor número de fallos! <br><br><br>
+            <img src="favicon\android-icon-72x72.png" alt="logo"> <br><br>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempore vel id dicta delectus non earum ducimus repellat, quae officia iure repellendus consectetur culpa, nesciunt at provident fugiat facilis amet modi.
+            <br><br>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis aperiam itaque architecto cumque. Neque provident, minus labore magni rem reiciendis repellat error aliquam enim! Dolor fuga accusamus architecto dolorem? Temporibus?
+            <br><br>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum unde cupiditate doloribus minima itaque sapiente corporis incidunt, consequuntur quasi. Ullam consequuntur labore rerum fugit aliquid a culpa corporis totam molestiae.
         </div>
         <div class="informacion EN">
             To play, you have to click in any card to flip it <br> <br>
@@ -289,7 +293,13 @@
             and if they are different, they wull flip again <br><br>
             You have to remember their position! <br><br>
             The game will end when you match all the cards. <br><br>
-            Try to finish with fewer mistakes as possible!
+            Try to finish with fewer mistakes as possible! <br><br><br>
+            <img src="favicon\android-icon-72x72.png" alt="logo"> <br><br>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est iure saepe, illum fuga vitae quo molestias dicta officiis excepturi ipsum autem officia fugit incidunt eligendi, ea ex deleniti voluptas ab?
+            <br><br>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Architecto ratione debitis, tempora quae commodi voluptatum veniam voluptate aspernatur non, asperiores ex laboriosam cumque nulla aliquam inventore magni? Sed, eos fugit!
+            <br><br>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo vel voluptas unde distinctio, laborum molestias ipsum error repudiandae suscipit veniam aut exercitationem impedit quaerat velit. Illum cupiditate eveniet possimus reprehenderit!
         </div>
     </div>
 
@@ -317,11 +327,17 @@
 
         });
 
+
+        if (localStorage.getItem('ganador')) {
+            let cganador = localStorage.getItem('ganador');
+            setGanador(cganador);            
+        }
+        /*
         if (getCookie('ganador')) {
             let cganador = getCookie('ganador');
 
             setGanador(cganador);
-        }
+        }*/
         let carta1 = document.getElementById('carta1');
         let carta2 = document.getElementById('carta2');
         let carta3 = document.getElementById('carta3');
@@ -364,8 +380,6 @@
 
         arrCartas.forEach(element => {
 
-
-
             element.addEventListener('click', function comparar(e) {
 
                 if (sel1 == '') {
@@ -377,7 +391,7 @@
                     } else {
                         sel2 = e.target;
                         if (sel1.style.backgroundImage === sel2.style.backgroundImage) {
-
+                            //Acierto
                             sel1.removeEventListener('click', comparar);
                             sel2.removeEventListener('click', comparar);
 
@@ -389,18 +403,20 @@
                             mensajesEN.innerHTML= "Nice!";
                             mensajesES.innerHTML = "¡Muy bien!";
                             marcador.value = puntuacion;
+                            //Ganar el Juego
                             if (marcador.value == 6) {
                                 alert("¡Has ganado! Errores: " + contadorErr);
 
                                 let usuarioErrores = (usuario + "&" + contadorErr);
                                 
-
-                                setCookie("ganador", usuarioErrores.toString(), 7);
+                                localStorage.setItem('ganador',  usuarioErrores.toString())
+                                
+                                //setCookie("ganador", usuarioErrores.toString(), 7);
 
                                 location.reload();
                             }
                         } else {
-
+                            //Error
                             setTimeout(() => {
                                 if (sel1.style.visibility == 'inherit') {
                                     sel2.style.backgroundImage = 'url(dorso.jpg)';
@@ -430,7 +446,7 @@
             })
         });
 
-
+/*   FUNCIONES GET Y SET COOKIE
         function getCookie(name) {
             var cookieArr = document.cookie.split(";");
 
@@ -451,7 +467,7 @@
             let expires = "expires=" + d.toUTCString();
             document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
         }
-
+*/
         function setGanador(c) {
 
             var arrGanador = c.split('&');
@@ -477,20 +493,22 @@
         let btnES = document.getElementById('btnES');
         let btnEN = document.getElementById('btnEN');
 
-        // Ponemos por defecto la página en Español
+        
         let idiomaActual = '';
         let pagEN = document.getElementsByClassName("EN");
         let pagES = document.getElementsByClassName("ES");
-   
-        for (i = 0; i <  pagEN.length; i++) {
-            pagEN[i].classList.add('invisible');
+        
+        // Por defecto ponemos la página en español  
+        if (!localStorage.getItem('idioma')) {
+            idiomaES();
+            mensajesES.innerHTML = 'Bienvenido';
         }
 
-        if (getCookie('idioma')== 'ES') {
+        if (localStorage.idioma == 'ES') {
             idiomaES();
         }
 
-        if (getCookie('idioma')== 'EN') {
+        if (localStorage.idioma == 'EN') {
             idiomaEN();
         }
 
@@ -503,7 +521,7 @@
 
                 function idiomaES(){
                     if (idiomaActual == 'ES') {
-                        mensajes.innerHTML = 'La página ya se encuentra en Español';
+                        mensajesES.innerHTML = 'La página ya se encuentra en Español';
                     }else{
                         for (i = 0; i <  pagEN.length; i++) {
                         pagEN[i].classList.add('invisible');
@@ -513,7 +531,7 @@
                         }
                                                  
                         mensajesES.innerHTML = 'Idioma: Español';
-                        setCookie('idioma', 'ES', 30);
+                        localStorage.setItem('idioma', 'ES');
                         idiomaActual = "ES";
                     }
         
@@ -521,7 +539,8 @@
 
                 function idiomaEN(){
                     if (idiomaActual == 'EN') {
-                        mensajes.innerHTML = 'This page already is in English';
+                       
+                        mensajesEN.innerHTML = 'This page already is in English';
                     }else{
                         for (i = 0; i <  pagEN.length; i++) {
                         pagEN[i].classList.remove('invisible');
@@ -531,13 +550,13 @@
                         }
                                        
                         mensajesEN.innerHTML = 'Language: English';
-                        setCookie('idioma', 'EN', 30);        
-                        idiomaActual = "EN";
+                        localStorage.setItem('idioma', 'EN');        
+                        idiomaActual = 'EN';
                     }
         
                 }
-        
-
+                
+                
     </script>
 
 </body>
