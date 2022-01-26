@@ -30,143 +30,7 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
-
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
-
-
-        * {
-            font-family: 'Righteous', cursive;
-          
-        }
-
-        body{
-            background-image:  url('background.jpg');;
-        }
-
-
-
-        .contenedorCartas {
-            display: grid;
-            grid-template-columns: 144px 144px 144px 144px;
-            grid-template-rows: 200px 200px 200px;
-            grid-gap: 10px;
-            justify-content: center;
-           
-
-
-        }
-
-        .cartas {
-
-            background-image: url("dorso.jpg");
-            background-size: contain;
-            background-repeat: no-repeat;
-            
-        }
-
-
-        header {
-            display: flex;
-            align-items: center;
-            text-align: center;
-           
-            height: 100px;
-            justify-content: center;
-
-        }
-
-        header img {
-
-            height: 100px;
-        }
-
-        .tablas {
-            display: flex;
-            justify-content: space-around;
-            height: 100px;
-
-            
-            border-radius: 30px;
-            margin-top: 20px;
-            
-        }
-
-        .tablas table, th, td {
-         
-            
-            
-        }
-
-        .tablas table{
-            height: 100px;
-            width: 300px;
-            text-align: center;
-            align-items: center;
-            background-color: rgba(110, 17, 17, 0.548);
-            
-            border-radius: 20px;
-            border:  5px outset rgba(153, 70, 70, 0.342);
-        }
-
-        .mensajes {
-            text-align: center;
-            height: 100px;
-            display: flex;
-            align-items: center;
-            justify-content: space-around;
-        }
-
-        .juego {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            
-
-        }
-
-        .informacion {
-            margin-left: none;
-            width: 500px;
-            height: 400px;
-            text-align: center;
-            padding-top: 200px;
-            background-image: url('fondo.jpg');
-            color: white;
-            background-repeat: no-repeat;
-            background-size: cover;
-            border-radius: 10px;
-            padding-left: 30px;
-            padding-right: 30px;
-            border: 4px solid black;
-            overflow:auto;
-
-        }
-
-        .informacion::selection {
-            color: red;
-            /**Este tipo de letra ya se encuentra en negrita por defecto por lo que no se puede poner en negrita*/  
-        }
-
-        .footer {
-            text-align: center;
-            height: 100px;
-            display: flex;
-            align-items: center;
-            justify-content: space-around;
-            color: whitesmoke;
-            margin-top: 10px;
-            background-color: rgba(245, 245, 245, 0.171);
-        }
-
-        .invisible {
-            display: none;
-        }
-
-        .idioma table{
-            width: 100px;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -189,16 +53,16 @@
                         <u>Puntuación</u>
                     </th>
                     <th class="EN">
-                       <u>Score</u> 
+                        <u>Score</u>
                     </th>
                     <th>
                         <i class="fas fa-trophy"></i>
                     </th>
                     <th class="ES">
-                       <u>Errores</u> 
+                        <u>Errores</u>
                     </th>
                     <th class="EN">
-                       <u>Mistakes</u> 
+                        <u>Mistakes</u>
                     </th>
                     <th>
                         <i class="fas fa-skull"></i>
@@ -222,7 +86,7 @@
                 </tr>
                 <tr>
                     <td id="winner">¿?¿?¿?</td>
-                  
+
                     <td><input type="text" value="100" id="erroresGanador" disabled size="3"></td>
 
                 </tr>
@@ -281,11 +145,16 @@
             El juego termina cuando emparejas todas las cartas. <br> <br>
             ¡Intenta terminar con el menor número de fallos! <br><br><br>
             <img src="favicon\android-icon-72x72.png" alt="logo"> <br><br>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempore vel id dicta delectus non earum ducimus repellat, quae officia iure repellendus consectetur culpa, nesciunt at provident fugiat facilis amet modi.
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempore vel id dicta delectus non earum ducimus
+            repellat, quae officia iure repellendus consectetur culpa, nesciunt at provident fugiat facilis amet modi.
             <br><br>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis aperiam itaque architecto cumque. Neque provident, minus labore magni rem reiciendis repellat error aliquam enim! Dolor fuga accusamus architecto dolorem? Temporibus?
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis aperiam itaque architecto cumque. Neque
+            provident, minus labore magni rem reiciendis repellat error aliquam enim! Dolor fuga accusamus architecto
+            dolorem? Temporibus?
             <br><br>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum unde cupiditate doloribus minima itaque sapiente corporis incidunt, consequuntur quasi. Ullam consequuntur labore rerum fugit aliquid a culpa corporis totam molestiae.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum unde cupiditate doloribus minima itaque
+            sapiente corporis incidunt, consequuntur quasi. Ullam consequuntur labore rerum fugit aliquid a culpa
+            corporis totam molestiae.
         </div>
         <div class="informacion EN">
             To play, you have to click in any card to flip it <br> <br>
@@ -295,11 +164,16 @@
             The game will end when you match all the cards. <br><br>
             Try to finish with fewer mistakes as possible! <br><br><br>
             <img src="favicon\android-icon-72x72.png" alt="logo"> <br><br>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est iure saepe, illum fuga vitae quo molestias dicta officiis excepturi ipsum autem officia fugit incidunt eligendi, ea ex deleniti voluptas ab?
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est iure saepe, illum fuga vitae quo molestias
+            dicta officiis excepturi ipsum autem officia fugit incidunt eligendi, ea ex deleniti voluptas ab?
             <br><br>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Architecto ratione debitis, tempora quae commodi voluptatum veniam voluptate aspernatur non, asperiores ex laboriosam cumque nulla aliquam inventore magni? Sed, eos fugit!
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Architecto ratione debitis, tempora quae commodi
+            voluptatum veniam voluptate aspernatur non, asperiores ex laboriosam cumque nulla aliquam inventore magni?
+            Sed, eos fugit!
             <br><br>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo vel voluptas unde distinctio, laborum molestias ipsum error repudiandae suscipit veniam aut exercitationem impedit quaerat velit. Illum cupiditate eveniet possimus reprehenderit!
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo vel voluptas unde distinctio, laborum
+            molestias ipsum error repudiandae suscipit veniam aut exercitationem impedit quaerat velit. Illum cupiditate
+            eveniet possimus reprehenderit!
         </div>
     </div>
 
@@ -310,27 +184,34 @@
 
     <script>
 
-        let nomUsuario = document.getElementById('usu');
-        var usuario = prompt("Escribe tu nombre de usuario: ");
-        nomUsuario.innerHTML = usuario;
-
-        mensajesES = document.getElementById('mensajesES');
-        mensajesEN = document.getElementById('mensajesEN');  
-
-        let mensajes = document.getElementById('mensajesES');
-
-        var usuGanador = document.getElementById('winner');
-        var fallosGanador = document.getElementById('erroresGanador');
+        //Recoger el nombre de usuario y reorganizar las cartas cada vez que se reinica la página
+        var usuario;
 
         window.addEventListener('load', function () {
             arrSrc.sort(function () { return Math.random() - 0.5 });
-
+            var nomUsuario = document.getElementById('usu');
+            usuario = prompt("Escribe tu nombre de usuario: ");
+            nomUsuario.innerHTML = usuario;
         });
 
+        //Mensajes dinámicos
+        mensajesES = document.getElementById('mensajesES');
+        mensajesEN = document.getElementById('mensajesEN');
+
+        //Ranking
+        var usuGanador = document.getElementById('winner');
+        var fallosGanador = document.getElementById('erroresGanador');
+
+        //MArcador y errores
+        let marcador = document.getElementById('marcador');
+        let errores = document.getElementById('errores');
+
+
+        //Si tenemos info de ganador guardada la mostramos en su respectiva tabla
 
         if (localStorage.getItem('ganador')) {
             let cganador = localStorage.getItem('ganador');
-            setGanador(cganador);            
+            setGanador(cganador);
         }
         /*
         if (getCookie('ganador')) {
@@ -338,6 +219,8 @@
 
             setGanador(cganador);
         }*/
+
+        // Cartas HTML
         let carta1 = document.getElementById('carta1');
         let carta2 = document.getElementById('carta2');
         let carta3 = document.getElementById('carta3');
@@ -351,11 +234,13 @@
         let carta11 = document.getElementById('carta11');
         let carta12 = document.getElementById('carta12');
 
+        //Array de las cartas
         let arrCartas = [
             carta1, carta2, carta3, carta4, carta5, carta6,
             carta7, carta8, carta9, carta10, carta11, carta12
         ];
 
+        //Array con las url de las cartas 
         let arrSrc = [
             "url(mtg1.jpg)", "url(mtg2.jpg)", "url(mtg3.jpg)",
             "url(mtg4.jpg)", "url(mtg5.jpg)", "url(mtg6.jpg)",
@@ -363,14 +248,15 @@
             "url(mtg4.jpg)", "url(mtg5.jpg)", "url(mtg6.jpg)"
         ];
 
-        let marcador = document.getElementById('marcador');
-        let errores = document.getElementById('errores');
-
+   
+        //Variables con las que se trabajará las selecciones y puntos
         let sel1 = '';
         let sel2 = '';
         let puntuacion = 0;
         let contadorErr = 0;
 
+        //Añadir la función de dar la vuelta a la carta
+        //Se asigna al azar una posición del array de las URL a cada una de las cartas
         for (let i = 0; i < arrCartas.length; i++) {
             const carta = arrCartas[i];
             carta.addEventListener('click', function () {
@@ -378,59 +264,72 @@
             })
         }
 
-        arrCartas.forEach(element => {
+        arrCartas.forEach(element => { //Por cada carta, añadimos la función de comparar si se hace click sobre estas
 
             element.addEventListener('click', function comparar(e) {
 
-                if (sel1 == '') {
-                    sel1 = e.target;
+                if (sel1 == '') { //Sel son las variables que harán referencia al primer click y segungo, si el primer click no tiene valor, se lo asignamos
+                    sel1 = e.target; // Esto asignaría el primer movimiento
 
                 } else {
-                    if (sel1 == e.target) {
+                    if (sel1 != e.target) { // Si el segundo movimiento no es  igual al primero, comparamos
 
-                    } else {
+                   
                         sel2 = e.target;
                         if (sel1.style.backgroundImage === sel2.style.backgroundImage) {
-                            //Acierto
-                            sel1.removeEventListener('click', comparar);
-                            sel2.removeEventListener('click', comparar);
-
+                            
+                            
+                            //Vamos a usar la visibilidad como variable para comprobar si hemos acertado o no en una carta  
+                            
                             sel1.style.visibility = 'inherit';
-                            sel1.style.visibility = 'inherit';
+                            sel2.style.visibility = 'inherit';
+                            
+                            //Limpiamos las variables de seleccion y añadimos un punto
                             sel1 = '';
                             sel2 = '';
+
                             puntuacion++;
-                            mensajesEN.innerHTML= "Nice!";
+                            mensajesEN.innerHTML = "Nice!";
                             mensajesES.innerHTML = "¡Muy bien!";
                             marcador.value = puntuacion;
                             //Ganar el Juego
                             if (marcador.value == 6) {
                                 alert("¡Has ganado! Errores: " + contadorErr);
+                                //Si se llega a los 6 aciertos, se compara el jugador anterior con este, si este tien menos fallos, será el que aparezca en la cookie
+                                if (fallosGanador.value >= contadorErr) {
+                                    
+                                    let usuarioErrores = (usuario + "&" + contadorErr);
 
-                                let usuarioErrores = (usuario + "&" + contadorErr);
+                                    localStorage.setItem('ganador', usuarioErrores.toString())
+                                }
+
                                 
-                                localStorage.setItem('ganador',  usuarioErrores.toString())
-                                
+
                                 //setCookie("ganador", usuarioErrores.toString(), 7);
 
                                 location.reload();
                             }
                         } else {
                             //Error
-                            setTimeout(() => {
-                                if (sel1.style.visibility == 'inherit') {
+                            setTimeout(() => { //Con el set timeout nos da tiempo a ver la carta volteada cuando fallamos
+
+                                if (sel1.style.visibility == 'inherit') { //Significa que la primera que hemos elegido, ya ha sido dada la vuelta
                                     sel2.style.backgroundImage = 'url(dorso.jpg)';
-                                } else if (sel2.style.visibility == 'inherit') {
+                             
+                                } else if (sel2.style.visibility == 'inherit') { // La segunda que hemos elegido ya ha sido dada la vuelta
+                                    
                                     sel1.style.backgroundImage = 'url(dorso.jpg)';
-                                } else {
+                                  
+                                } else { //Error normal
                                     sel1.style.backgroundImage = 'url(dorso.jpg)';
                                     sel2.style.backgroundImage = 'url(dorso.jpg)';
+                             
                                 }
 
                                 sel1 = '';
                                 sel2 = '';
 
-                                mensajesEN.innerHTML= "Fail! Try again";
+                                mensajesEN.innerHTML = "Fail! Try again";
                                 mensajesES.innerHTML = "¡Error! Prueba otra vez";
 
                                 contadorErr++;
@@ -446,45 +345,34 @@
             })
         });
 
-/*   FUNCIONES GET Y SET COOKIE
-        function getCookie(name) {
-            var cookieArr = document.cookie.split(";");
-
-            for (var i = 0; i < cookieArr.length; i++) {
-                var cookiePair = cookieArr[i].split("=");
-
-                if (name == cookiePair[0].trim()) {
-
-                    return decodeURIComponent(cookiePair[1]);
+        /*   FUNCIONES GET Y SET COOKIE
+                function getCookie(name) {
+                    var cookieArr = document.cookie.split(";");
+        
+                    for (var i = 0; i < cookieArr.length; i++) {
+                        var cookiePair = cookieArr[i].split("=");
+        
+                        if (name == cookiePair[0].trim()) {
+        
+                            return decodeURIComponent(cookiePair[1]);
+                        }
+                    }
+                    return null;
                 }
-            }
-            return null;
-        }
-
-        function setCookie(cname, cvalue, exdays) {
-            const d = new Date();
-            d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-            let expires = "expires=" + d.toUTCString();
-            document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-        }
-*/
+        
+                function setCookie(cname, cvalue, exdays) {
+                    const d = new Date();
+                    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+                    let expires = "expires=" + d.toUTCString();
+                    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+                }
+        */
         function setGanador(c) {
 
             var arrGanador = c.split('&');
 
-            var ultimoUsuario = arrGanador[0];
-            var ultimosFallos = arrGanador[1];
-
-            if (fallosGanador.value >= ultimosFallos) {
-                fallosGanador.value = ultimosFallos;
-                usuGanador.innerHTML = ultimoUsuario;
-
-            } else {
-
-            }
-
-            fallosGanador.value = ultimosFallos;
-            usuGanador.innerHTML = ultimoUsuario;
+            fallosGanador.value = arrGanador[1];
+            usuGanador.innerHTML = arrGanador[0];
 
         }
 
@@ -493,18 +381,18 @@
         let btnES = document.getElementById('btnES');
         let btnEN = document.getElementById('btnEN');
 
-        
+
         let idiomaActual = '';
-        let pagEN = document.getElementsByClassName("EN");
+        let pagEN = document.getElementsByClassName("EN"); //Recogemos todos los elementos en español o inglés
         let pagES = document.getElementsByClassName("ES");
-        
+
         // Por defecto ponemos la página en español  
         if (!localStorage.getItem('idioma')) {
             idiomaES();
             mensajesES.innerHTML = 'Bienvenido';
         }
 
-        if (localStorage.idioma == 'ES') {
+        if (localStorage.idioma == 'ES') { //Cambio de idioma según el localstorage
             idiomaES();
         }
 
@@ -513,50 +401,50 @@
         }
 
 
-                btnES.addEventListener('click', idiomaES);
-        
-            
-                btnEN.addEventListener('click', idiomaEN);
+        btnES.addEventListener('click', idiomaES); //Cambio de idioma con el botón de idioma
 
 
-                function idiomaES(){
-                    if (idiomaActual == 'ES') {
-                        mensajesES.innerHTML = 'La página ya se encuentra en Español';
-                    }else{
-                        for (i = 0; i <  pagEN.length; i++) {
-                        pagEN[i].classList.add('invisible');
-                        }
-                        for (i = 0; i <  pagES.length; i++) {
-                        pagES[i].classList.remove('invisible');
-                        }
-                                                 
-                        mensajesES.innerHTML = 'Idioma: Español';
-                        localStorage.setItem('idioma', 'ES');
-                        idiomaActual = "ES";
-                    }
-        
+        btnEN.addEventListener('click', idiomaEN);
+
+
+        function idiomaES() {
+            if (idiomaActual == 'ES') {
+                mensajesES.innerHTML = 'La página ya se encuentra en Español';
+            } else {
+                for (i = 0; i < pagEN.length; i++) {
+                    pagEN[i].classList.add('invisible');
+                }
+                for (i = 0; i < pagES.length; i++) {
+                    pagES[i].classList.remove('invisible');
                 }
 
-                function idiomaEN(){
-                    if (idiomaActual == 'EN') {
-                       
-                        mensajesEN.innerHTML = 'This page already is in English';
-                    }else{
-                        for (i = 0; i <  pagEN.length; i++) {
-                        pagEN[i].classList.remove('invisible');
-                        }
-                        for (i = 0; i <  pagES.length; i++) {                      
-                        pagES[i].classList.add('invisible');
-                        }
-                                       
-                        mensajesEN.innerHTML = 'Language: English';
-                        localStorage.setItem('idioma', 'EN');        
-                        idiomaActual = 'EN';
-                    }
-        
+                mensajesES.innerHTML = 'Idioma: Español';
+                localStorage.setItem('idioma', 'ES');
+                idiomaActual = "ES";
+            }
+
+        }
+
+        function idiomaEN() {
+            if (idiomaActual == 'EN') {
+
+                mensajesEN.innerHTML = 'This page already is in English';
+            } else {
+                for (i = 0; i < pagEN.length; i++) {
+                    pagEN[i].classList.remove('invisible');
                 }
-                
-                
+                for (i = 0; i < pagES.length; i++) {
+                    pagES[i].classList.add('invisible');
+                }
+
+                mensajesEN.innerHTML = 'Language: English';
+                localStorage.setItem('idioma', 'EN');
+                idiomaActual = 'EN';
+            }
+
+        }
+
+
     </script>
 
 </body>
