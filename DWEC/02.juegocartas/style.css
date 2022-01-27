@@ -7,7 +7,7 @@
 }
 
 body {
-    background-image: url('background.jpg');
+    background-image: url('img/background.jpg');
     ;
 }
 
@@ -26,7 +26,7 @@ body {
 
 .cartas {
 
-    background-image: url("dorso.jpg");
+    background-image: url("img/dorso.jpg");
     background-size: contain;
     background-repeat: no-repeat;
 
@@ -92,7 +92,7 @@ header img {
     height: 400px;
     text-align: center;
     padding-top: 200px;
-    background-image: url('fondo.jpg');
+    background-image: url('img/fondo.jpg');
     color: white;
     background-repeat: no-repeat;
     background-size: cover;
