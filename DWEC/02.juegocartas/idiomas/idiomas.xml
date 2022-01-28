@@ -9,7 +9,7 @@
         <ALERTS>(Alerts will appear here)</ALERTS>
         <RIGHT>Nice! You get one point</RIGHT>
         <WRONG>Wrong! Try again</WRONG>
-        <WIN>Congratulations! You finished the game. Errrors: </WIN>    
+        <WIN>Congratulations! You finished the game. Errors: </WIN>    
     </EN>
     <ES>
         <SCORE>Puntuación</SCORE>

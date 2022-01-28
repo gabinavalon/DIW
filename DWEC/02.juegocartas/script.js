@@ -98,6 +98,9 @@ arrCartas.forEach(element => {
 
                     sel1.style.visibility = 'inherit';
                     sel2.style.visibility = 'inherit';
+
+                    sel1.classList.add('sombreado');
+                    sel2.classList.add('sombreado');
                   
                     sel1 = '';
                     sel2 = '';
@@ -179,40 +182,36 @@ if (localStorage.idioma == 'EN') {
     idiomaEN();
 }
 
+var idi;
 
 btnES.addEventListener('click', idiomaES);
 
 btnEN.addEventListener('click', idiomaEN);
 
-
 function idiomaES() {
-
-    var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            cargarXMLES(this);
-        }
-    };
-    xhr.open("GET", "idiomas/idiomas.xml", true);
-    xhr.send();
+    idioma('ES');
 }
-
-
 function idiomaEN() {
+    idioma('EN');
+}
+
+function idioma(idi) {
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            cargarXMLEN(this);
+            cargarXML(this, idi);
         }
     };
     xhr.open("GET", "idiomas/idiomas.xml", true);
     xhr.send();
-
 }
 
-function cargarXMLES(xml) {
+
+function cargarXML(xml, idi) {
     var docXML = xml.responseXML;
-    var idioma = docXML.getElementsByTagName("ES"); 
+    var idioma = docXML.getElementsByTagName(idi);
+    
+   
     document.getElementById('score').innerHTML = idioma[0].getElementsByTagName("SCORE")[0].textContent;
     document.getElementById('errors').innerHTML = idioma[0].getElementsByTagName("ERRORS")[0].textContent;
     document.getElementById('topPlayer').innerHTML = idioma[0].getElementsByTagName("TOP")[0].textContent;
@@ -224,28 +223,9 @@ function cargarXMLES(xml) {
     msgWrong =  idioma[0].getElementsByTagName("WRONG")[0].textContent;
     msgWin =  idioma[0].getElementsByTagName("WIN")[0].textContent;
 
-    localStorage.setItem('idioma', 'ES');
+    localStorage.setItem('idioma', idi);
 
-    cambiaDesc('es');
-}
-
-function cargarXMLEN(xml) {
-    var docXML = xml.responseXML;
-    var idioma = docXML.getElementsByTagName("EN"); 
-    document.getElementById('score').innerHTML = idioma[0].getElementsByTagName("SCORE")[0].textContent;
-    document.getElementById('errors').innerHTML = idioma[0].getElementsByTagName("ERRORS")[0].textContent;
-    document.getElementById('topPlayer').innerHTML = idioma[0].getElementsByTagName("TOP")[0].textContent;
-    document.getElementById('topErr').innerHTML = idioma[0].getElementsByTagName("ERRTOP")[0].textContent;
-    document.getElementById('language').innerHTML = idioma[0].getElementsByTagName("LANGUAGE")[0].textContent;
-    document.getElementById('alerts').innerHTML = idioma[0].getElementsByTagName("ALERTS")[0].textContent;
-
-    msgRight =  idioma[0].getElementsByTagName("RIGHT")[0].textContent;
-    msgWrong =  idioma[0].getElementsByTagName("WRONG")[0].textContent;
-    msgWin =  idioma[0].getElementsByTagName("WIN")[0].textContent;
-
-    localStorage.setItem('idioma', 'EN');
-
-    cambiaDesc('en');
+    cambiaDesc(idi);
 }
 
 
