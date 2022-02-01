@@ -4,7 +4,7 @@ si son distintas, volverán a darse la vuelta. <br><br>
 ¡Tendrás que recordar su posición! <br><br>
 El juego termina cuando emparejas todas las cartas. <br> <br>
 ¡Intenta terminar con el menor número de fallos! <br><br><br>
-<img src="favicon\android-icon-72x72.png" alt="logo"> <br><br>
+<img src="img\favicon\android-icon-72x72.png" alt="logo"> <br><br>
 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempore vel id dicta delectus non earum ducimus
 repellat, quae officia iure repellendus consectetur culpa, nesciunt at provident fugiat facilis amet modi.
 <br><br>

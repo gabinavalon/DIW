@@ -4,7 +4,7 @@ and if they are different, they wull flip again <br><br>
 You have to remember their position! <br><br>
 The game will end when you match all the cards. <br><br>
 Try to finish with fewer mistakes as possible! <br><br><br>
-<img src="favicon\android-icon-72x72.png" alt="logo"> <br><br>
+<img src="img\favicon\android-icon-72x72.png" alt="logo"> <br><br>
 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est iure saepe, illum fuga vitae quo molestias
 dicta officiis excepturi ipsum autem officia fugit incidunt eligendi, ea ex deleniti voluptas ab?
 <br><br>
