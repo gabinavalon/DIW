@@ -199,50 +199,32 @@ function idioma(idi) {
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            cargarXML(this, idi);
+            var myArr = JSON.parse(this.responseText)
+            cargarJSON(myArr, idi);
         }
     };
-    xhr.open("GET", "idiomas/idiomas.xml", true);
+    xhr.open("GET", "idiomas/lang.json", true);
     xhr.send();
 }
 
 
-function cargarXML(xml, idi) {
-    var docXML = xml.responseXML;
-    var idioma = docXML.getElementsByTagName(idi);
+function cargarJSON(json, idi) {
     
-   
-    document.getElementById('score').innerHTML = idioma[0].getElementsByTagName("SCORE")[0].textContent;
-    document.getElementById('errors').innerHTML = idioma[0].getElementsByTagName("ERRORS")[0].textContent;
-    document.getElementById('topPlayer').innerHTML = idioma[0].getElementsByTagName("TOP")[0].textContent;
-    document.getElementById('topErr').innerHTML = idioma[0].getElementsByTagName("ERRTOP")[0].textContent;
-    document.getElementById('language').innerHTML = idioma[0].getElementsByTagName("LANGUAGE")[0].textContent;
-    document.getElementById('alerts').innerHTML = idioma[0].getElementsByTagName("ALERTS")[0].textContent;
+    var idioma = json["LANGUAGE"][idi];
+
+    document.getElementById('score').innerHTML = idioma['SCORE'];
+    document.getElementById('errors').innerHTML = idioma["ERRORS"];
+    document.getElementById('topPlayer').innerHTML = idioma["TOP"];
+    document.getElementById('topErr').innerHTML = idioma["ERRTOP"];
+    document.getElementById('language').innerHTML = idioma["LANG"];
+    document.getElementById('alerts').innerHTML = idioma['ALERTS'];
     
-    msgRight =  idioma[0].getElementsByTagName("RIGHT")[0].textContent;
-    msgWrong =  idioma[0].getElementsByTagName("WRONG")[0].textContent;
-    msgWin =  idioma[0].getElementsByTagName("WIN")[0].textContent;
+    msgRight =  idioma['RIGHT'];
+    msgWrong =  idioma['WRONG'];
+    msgWin =  idioma['WIN'];
 
-    localStorage.setItem('idioma', idi);
+    document.getElementById("desc").innerHTML = idioma['DESC'];
 
-    cambiaDesc(idi);
+    localStorage.setItem('idioma', idi); 
 }
 
-
-function cambiaDesc(idioma) {
-    var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            document.getElementById("desc").innerHTML = this.responseText;
-        }
-    };
-    /* .open: especifica la solicitud
-     - GET/POST.
-     - Archivo: txt, php, xml, json, etc.
-     - true/false: método de envío. */
-    
-    xhr.open("GET", 'idiomas/descripcion_'+idioma+'.txt', true);
-    /* .send: envía la solicitud al servidor.
-        Si utilizamos POST debemos pasar los datos por parámetro */
-    xhr.send();
-}
