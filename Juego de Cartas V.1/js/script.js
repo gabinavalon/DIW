@@ -4,8 +4,8 @@ let msgWin;
 
 window.addEventListener('load', function () {
     arrSrc.sort(function () { return Math.random() - 0.5 });
-    const nomUsuario = document.getElementById('usu');
-    let usuario = prompt("Escribe tu nombre de usuario: ");
+    var nomUsuario = document.getElementById('usu');
+    var usuario = prompt("Escribe tu nombre de usuario: ");
     nomUsuario.innerHTML = usuario;
 });
 

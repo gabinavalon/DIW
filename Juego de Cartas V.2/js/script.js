@@ -1,60 +1,23 @@
 let msgRight;
 let msgWrong;
 let msgWin;
+let usuario;
 
-window.addEventListener('load', function () {
+$(document).ready(function () {  
     arrSrc.sort(function () { return Math.random() - 0.5 });
-    const nomUsuario = document.getElementById('usu');
-    let usuario = prompt("Escribe tu nombre de usuario: ");
-    nomUsuario.innerHTML = usuario;
+    usuario = prompt("Escribe tu nombre de usuario: ");
+    $('#usu').html(usuario);
 });
 
-
-
-//Mensajes dinámicos
-const mensajes = document.getElementById('alerts');
-
-
-//Ranking
-var usuGanador = document.getElementById('winner');
-var fallosGanador = document.getElementById('erroresGanador');
-
-//MArcador y errores
-const marcador = document.getElementById('marcador');
-const errores = document.getElementById('errores');
-
-
-//Si tenemos info de ganador guardada la mostramos en su respectiva tabla
-
 if (localStorage.getItem('ganador')) {
-    let cookieganador = localStorage.getItem('ganador');
+    let cookieganador = localStorage.getItem('ganador');   // El local storage lo dejamos igual con Jquery¿?
     setGanador(cookieganador);
 }
-/*
-if (getCookie('ganador')) {
-    let cganador = getCookie('ganador');
-
-    setGanador(cganador);
-}*/
-
-// Cartas HTML
-let carta1 = document.getElementById('carta1');
-let carta2 = document.getElementById('carta2');
-let carta3 = document.getElementById('carta3');
-let carta4 = document.getElementById('carta4');
-let carta5 = document.getElementById('carta5');
-let carta6 = document.getElementById('carta6');
-let carta7 = document.getElementById('carta7');
-let carta8 = document.getElementById('carta8');
-let carta9 = document.getElementById('carta9');
-let carta10 = document.getElementById('carta10');
-let carta11 = document.getElementById('carta11');
-let carta12 = document.getElementById('carta12');
 
 //Array de las cartas
 const arrCartas = [
-    carta1, carta2, carta3, carta4, carta5, carta6,
-    carta7, carta8, carta9, carta10, carta11, carta12
+    $('#carta1')[0], $('#carta2')[0], $('#carta3')[0], $('#carta4')[0], $('#carta5')[0], $('#carta6')[0],
+    $('#carta7')[0], $('#carta8')[0], $('#carta9')[0], $('#carta10')[0], $('#carta11')[0], $('#carta12')[0]
 ];
 
 //Array con las url de las cartas 
@@ -76,15 +39,19 @@ let contadorErr = 0;
 //Se asigna al azar una posición del array de las URL a cada una de las cartas
 for (let i = 0; i < arrCartas.length; i++) {
     const carta = arrCartas[i];
-    carta.addEventListener('click', function () {
-        carta.style.backgroundImage = arrSrc[i];
-    })
+    $(carta).click(function () {
+        $(this).css("background-image", arrSrc[i]);       
+    });
 }
+
+/*
+$.each(arrCartas, function (carta, valor) {
+    console.log(carta + ' ' + valor);
+});*/
 
 arrCartas.forEach(element => { 
 
-    element.addEventListener('click', function comparar(e) {
-
+    $(element).click(function comparar(e) {
         if (seleccion1 == '') { 
             seleccion1 = e.target; 
 
@@ -98,20 +65,22 @@ arrCartas.forEach(element => {
                     seleccion1.style.visibility = 'inherit';
                     seleccion2.style.visibility = 'inherit';
 
-                    seleccion1.classList.add('sombreado');
-                    seleccion2.classList.add('sombreado');
+                    $(seleccion1).addClass('sombreado');
+                    $(seleccion2).addClass('sombreado');
                   
                     seleccion1 = '';
                     seleccion2 = '';
 
                     puntuacion++;
-                    mensajes.innerHTML = msgRight;
-                    marcador.value = puntuacion;
 
-                    if (marcador.value == 6) {
+                    $('#alerts').html(msgRight);
+                    $('#marcador').val(puntuacion);
+
+
+                    if ($('#marcador').val() == 6) {
                         alert(msgWin + contadorErr);
                        
-                        if (fallosGanador.value >= contadorErr) {
+                        if ($('#erroresGanador').val() >= contadorErr) {
 
                             let usuarioErrores = (usuario + "&" + contadorErr);
 
@@ -140,58 +109,41 @@ arrCartas.forEach(element => {
                         seleccion1 = '';
                         seleccion2 = '';
 
-                        mensajes.innerHTML = msgWrong;
-                       
+                        $('#alerts').html(msgWrong);                      
 
                         contadorErr++;
-                        errores.value = contadorErr;
 
+                        $('errores').val(contadorErr);
 
                     }, 500);
 
                 }
             }
         }
-
-    })
+    });
 });
 
 function setGanador(c) {
-
     let arrGanador = c.split('&');
-    fallosGanador.value = arrGanador[1];
-    usuGanador.innerHTML = arrGanador[0];
 
+    $('#erroresGanador').val(arrGanador[1]);
+    $('#winner').val(arrGanador[0]);
 }
 
-
-const btnES = document.getElementById('btnES');
-const btnEN = document.getElementById('btnEN');
-
-
 if (!localStorage.getItem('idioma')) {
-    idiomaES();
+    idioma('ES');
 }
 
 if (localStorage.idioma == 'ES') { 
-    idiomaES();
+    idioma('ES');
 }
 
 if (localStorage.idioma == 'EN') {
-    idiomaEN();
-}
-
-
-btnES.addEventListener('click', idiomaES);
-
-btnEN.addEventListener('click', idiomaEN);
-
-function idiomaES() {
-    idioma('ES');
-}
-function idiomaEN() {
     idioma('EN');
 }
+
+$('#btnES').click(function() { idioma('ES') });
+$('#btnEN').click(function() { idioma('EN') });
 
 function idioma(idi) {
     var xhr = new XMLHttpRequest();
@@ -205,25 +157,22 @@ function idioma(idi) {
     xhr.send();
 }
 
-
 function cargarJSON(json, idi) {
     
     var idioma = json["LANGUAGE"][idi];
 
-    console.log(idioma);
+    $('#score').html(idioma['SCORE']);
+    $('#errors').html(idioma["ERRORS"]);
+    $('#topPlayer').html(idioma["TOP"]);
+    $('#topErr').html(idioma["ERRTOP"]);
+    $('#language').html(idioma["LANG"]);
+    $('#alerts').html(idioma['ALERTS']);
 
-    document.getElementById('score').innerHTML = idioma['SCORE'];
-    document.getElementById('errors').innerHTML = idioma["ERRORS"];
-    document.getElementById('topPlayer').innerHTML = idioma["TOP"];
-    document.getElementById('topErr').innerHTML = idioma["ERRTOP"];
-    document.getElementById('language').innerHTML = idioma["LANG"];
-    document.getElementById('alerts').innerHTML = idioma['ALERTS'];
-    
     msgRight =  idioma['RIGHT'];
     msgWrong =  idioma['WRONG'];
     msgWin =  idioma['WIN'];
 
-    document.getElementById("desc").innerHTML = idioma['DESC'];
+    $('#desc').html(idioma['DESC']);
 
     localStorage.setItem('idioma', idi); 
 }
