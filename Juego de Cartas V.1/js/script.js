@@ -16,8 +16,8 @@ const mensajes = document.getElementById('alerts');
 
 
 //Ranking
-const usuGanador = document.getElementById('winner');
-const fallosGanador = document.getElementById('erroresGanador');
+var usuGanador = document.getElementById('winner');
+var fallosGanador = document.getElementById('erroresGanador');
 
 //MArcador y errores
 const marcador = document.getElementById('marcador');
