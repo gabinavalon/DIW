@@ -1,35 +1,34 @@
-var usuario;
-var msgRight;
-var msgWrong;
-var msgWin;
+let msgRight;
+let msgWrong;
+let msgWin;
 
 window.addEventListener('load', function () {
     arrSrc.sort(function () { return Math.random() - 0.5 });
-    var nomUsuario = document.getElementById('usu');
-    usuario = prompt("Escribe tu nombre de usuario: ");
+    const nomUsuario = document.getElementById('usu');
+    let usuario = prompt("Escribe tu nombre de usuario: ");
     nomUsuario.innerHTML = usuario;
 });
 
 
 
 //Mensajes dinámicos
-mensajes = document.getElementById('alerts');
+const mensajes = document.getElementById('alerts');
 
 
 //Ranking
-var usuGanador = document.getElementById('winner');
-var fallosGanador = document.getElementById('erroresGanador');
+const usuGanador = document.getElementById('winner');
+const fallosGanador = document.getElementById('erroresGanador');
 
 //MArcador y errores
-let marcador = document.getElementById('marcador');
-let errores = document.getElementById('errores');
+const marcador = document.getElementById('marcador');
+const errores = document.getElementById('errores');
 
 
 //Si tenemos info de ganador guardada la mostramos en su respectiva tabla
 
 if (localStorage.getItem('ganador')) {
-    let cganador = localStorage.getItem('ganador');
-    setGanador(cganador);
+    let cookieganador = localStorage.getItem('ganador');
+    setGanador(cookieganador);
 }
 /*
 if (getCookie('ganador')) {
@@ -53,13 +52,13 @@ let carta11 = document.getElementById('carta11');
 let carta12 = document.getElementById('carta12');
 
 //Array de las cartas
-let arrCartas = [
+const arrCartas = [
     carta1, carta2, carta3, carta4, carta5, carta6,
     carta7, carta8, carta9, carta10, carta11, carta12
 ];
 
 //Array con las url de las cartas 
-let arrSrc = [
+const arrSrc = [
     "url(img/mtg1.jpg)", "url(img/mtg2.jpg)", "url(img/mtg3.jpg)",
     "url(img/mtg4.jpg)", "url(img/mtg5.jpg)", "url(img/mtg6.jpg)",
     "url(img/mtg1.jpg)", "url(img/mtg2.jpg)", "url(img/mtg3.jpg)",
@@ -68,8 +67,8 @@ let arrSrc = [
 
 
 //Variables con las que se trabajará las selecciones y puntos
-let sel1 = '';
-let sel2 = '';
+let seleccion1 = '';
+let seleccion2 = '';
 let puntuacion = 0;
 let contadorErr = 0;
 
@@ -86,24 +85,24 @@ arrCartas.forEach(element => {
 
     element.addEventListener('click', function comparar(e) {
 
-        if (sel1 == '') { 
-            sel1 = e.target; 
+        if (seleccion1 == '') { 
+            seleccion1 = e.target; 
 
         } else {
-            if (sel1 != e.target) { 
+            if (seleccion1 != e.target) { 
 
 
-                sel2 = e.target;
-                if (sel1.style.backgroundImage === sel2.style.backgroundImage) {
+                seleccion2 = e.target;
+                if (seleccion1.style.backgroundImage === seleccion2.style.backgroundImage) {
 
-                    sel1.style.visibility = 'inherit';
-                    sel2.style.visibility = 'inherit';
+                    seleccion1.style.visibility = 'inherit';
+                    seleccion2.style.visibility = 'inherit';
 
-                    sel1.classList.add('sombreado');
-                    sel2.classList.add('sombreado');
+                    seleccion1.classList.add('sombreado');
+                    seleccion2.classList.add('sombreado');
                   
-                    sel1 = '';
-                    sel2 = '';
+                    seleccion1 = '';
+                    seleccion2 = '';
 
                     puntuacion++;
                     mensajes.innerHTML = msgRight;
@@ -125,21 +124,21 @@ arrCartas.forEach(element => {
 
                     setTimeout(() => { 
 
-                        if (sel1.style.visibility == 'inherit') {
-                            sel2.style.backgroundImage = 'url(img/dorso.jpg)';
+                        if (seleccion1.style.visibility == 'inherit') {
+                            seleccion2.style.backgroundImage = 'url(img/dorso.jpg)';
 
-                        } else if (sel2.style.visibility == 'inherit') { 
+                        } else if (seleccion2.style.visibility == 'inherit') { 
 
-                            sel1.style.backgroundImage = 'url(img/dorso.jpg)';
+                            seleccion1.style.backgroundImage = 'url(img/dorso.jpg)';
 
                         } else { 
-                            sel1.style.backgroundImage = 'url(img/dorso.jpg)';
-                            sel2.style.backgroundImage = 'url(img/dorso.jpg)';
+                            seleccion1.style.backgroundImage = 'url(img/dorso.jpg)';
+                            seleccion2.style.backgroundImage = 'url(img/dorso.jpg)';
 
                         }
 
-                        sel1 = '';
-                        sel2 = '';
+                        seleccion1 = '';
+                        seleccion2 = '';
 
                         mensajes.innerHTML = msgWrong;
                        
@@ -159,15 +158,15 @@ arrCartas.forEach(element => {
 
 function setGanador(c) {
 
-    var arrGanador = c.split('&');
+    let arrGanador = c.split('&');
     fallosGanador.value = arrGanador[1];
     usuGanador.innerHTML = arrGanador[0];
 
 }
 
 
-let btnES = document.getElementById('btnES');
-let btnEN = document.getElementById('btnEN');
+const btnES = document.getElementById('btnES');
+const btnEN = document.getElementById('btnEN');
 
 
 if (!localStorage.getItem('idioma')) {
@@ -182,7 +181,6 @@ if (localStorage.idioma == 'EN') {
     idiomaEN();
 }
 
-var idi;
 
 btnES.addEventListener('click', idiomaES);
 
@@ -211,6 +209,8 @@ function idioma(idi) {
 function cargarJSON(json, idi) {
     
     var idioma = json["LANGUAGE"][idi];
+
+    console.log(idioma);
 
     document.getElementById('score').innerHTML = idioma['SCORE'];
     document.getElementById('errors').innerHTML = idioma["ERRORS"];
