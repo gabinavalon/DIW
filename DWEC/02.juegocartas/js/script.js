@@ -201,7 +201,7 @@ function idioma(idi) {
             cargarJSON(myArr, idi);
         }
     };
-    xhr.open("GET", "idiomas/lang.json", true);
+    xhr.open("GET", "lang/lang.json", true);
     xhr.send();
 }
 
