@@ -60,10 +60,11 @@ arrCartas.forEach(element => {
 
 
                 seleccion2 = e.target;
-                if (seleccion1.style.backgroundImage === seleccion2.style.backgroundImage) {
 
-                    seleccion1.style.visibility = 'inherit';
-                    seleccion2.style.visibility = 'inherit';
+                if ($(seleccion1).css('background-image') === $(seleccion2).css('background-image') ) {
+                   
+                   // seleccion1.style.visibility = 'inherit';
+                   // seleccion2.style.visibility = 'inherit';
 
                     $(seleccion1).addClass('sombreado');
                     $(seleccion2).addClass('sombreado');
@@ -78,6 +79,7 @@ arrCartas.forEach(element => {
 
 
                     if ($('#marcador').val() == 6) {
+                        
                         alert(msgWin + contadorErr);
                        
                         if ($('#erroresGanador').val() >= contadorErr) {
@@ -93,16 +95,18 @@ arrCartas.forEach(element => {
 
                     setTimeout(() => { 
 
-                        if (seleccion1.style.visibility == 'inherit') {
-                            seleccion2.style.backgroundImage = 'url(img/dorso.jpg)';
+                        if ($(seleccion1).hasClass('sombreado')) {
+                            
+                            $(seleccion2).css('background-image', 'url(img/dorso.jpg)');
 
-                        } else if (seleccion2.style.visibility == 'inherit') { 
+                        }else if($(seleccion2).hasClass('sombreado')){
 
-                            seleccion1.style.backgroundImage = 'url(img/dorso.jpg)';
+                            $(seleccion1).css('background-image', 'url(img/dorso.jpg)');
 
-                        } else { 
-                            seleccion1.style.backgroundImage = 'url(img/dorso.jpg)';
-                            seleccion2.style.backgroundImage = 'url(img/dorso.jpg)';
+                        } else {
+
+                            $(seleccion1).css('background-image', 'url(img/dorso.jpg)');
+                            $(seleccion2).css('background-image', 'url(img/dorso.jpg)');
 
                         }
 
@@ -113,7 +117,7 @@ arrCartas.forEach(element => {
 
                         contadorErr++;
 
-                        $('errores').val(contadorErr);
+                        $('#errores').val(contadorErr);
 
                     }, 500);
 
