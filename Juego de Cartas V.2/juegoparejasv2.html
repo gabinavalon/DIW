@@ -108,16 +108,38 @@
                 </div>
             </div>
         </div>
+        <br><br>
+        <div class="row">
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" id="progress"
+                    role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
+            </div>
+        </div>
 
-        <div class="mensajes" id="alerts">
-            (Los mensajes aparecerán aquí)
+        <div class="row">
+            <div class="mensajes" id="alerts">
+                (Los mensajes aparecerán aquí)
+            </div>
+
         </div>
 
 
-        <div class="container juego">
 
-            <div class="row">
-                <div class="col container">
+        <div class="row juego">
+            <div class="col">
+                <dic class="row">
+                    <button type="button" class="btn btn-success btn-lg" id="btnStart">Start</button>
+                    <button type="button" class="btn btn-warning btn-lg" id="btnReplay" style="display: none;">Reiniciar</button>
+                </dic>
+                <br>
+                <div class="row">
+                    <div class="informacion" id="desc"></div>
+                </div>
+
+            </div>
+
+            <div class="col">
+                <div class="container">
                     <div class="row">
                         <div class="col cartas" id="carta1"></div>
                         <div class="col cartas" id="carta2"></div>
@@ -141,9 +163,6 @@
                     </div>
 
                 </div>
-
-
-                <div class="col informacion" id="desc"></div>
             </div>
         </div>
 

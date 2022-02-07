@@ -3,13 +3,11 @@ let msgWrong;
 let msgWin;
 let usuario;
 
+
 $(document).ready(function () {
     arrSrc.sort(function () {
         return Math.random() - 0.5;
     });
-    usuario = 'gabi';
-    //prompt("Escribe tu nombre de usuario: ");
-    $("#usu").html(usuario);
 });
 
 if (localStorage.getItem("ganador")) {
@@ -55,118 +53,132 @@ const arrSrc = [
     "url(img/bomba.jpg)",
 ];
 
+const arrProgress = ["0%", "16.66%", "33.34%", "50%", "66.66%", "83.33%", "100%"];
+
 //Variables con las que se trabajará las selecciones y puntos
 let seleccion1 = "";
 let seleccion2 = "";
 let puntuacion = 0;
 let contadorErr = 0;
+$()
+$('#btnStart').click(function startGame() {
+    $('#btnStart').css('display', 'none');
+    $('#btnReplay').css('display', 'inherit');
 
-//Añadir la función de dar la vuelta a la carta
-//Se asigna al azar una posición del array de las URL a cada una de las cartas
+    usuario = prompt("Escribe tu nombre de usuario: ");
+    $("#usu").html(usuario);
+    //Añadir la función de dar la vuelta a la carta
+    //Se asigna al azar una posición del array de las URL a cada una de las cartas
 
-for (let i = 0; i < arrCartas.length; i++) {
-    const carta = arrCartas[i];
-    $(carta).click(function () {
-        $(this).css("background-image", arrSrc[i]);
+    for (let i = 0; i < arrCartas.length; i++) {
+        const carta = arrCartas[i];
+        $(carta).click(function () {
+            $(this).css("background-image", arrSrc[i]);
 
-        if (arrSrc[i] == "url(img/bomba.jpg)") {
-            // Si se añade el fondo de bomba, añadimos la clase bomba a este elemento
-            $(this).addClass("bomba"); // Lo malo, es que se vería inspeccionando elementos PROVISIONAL
-        }
-    });
-}
-
-arrCartas.forEach((element) => {
-    $(element).click(function comparar(e) {
-        if (seleccion1 == "") {
-            seleccion1 = e.target;
-
-            if ($(seleccion1).hasClass("bomba")) {
-                $(".audio")[3].play();
-                $(seleccion1).removeClass("bomba");
-                setTimeout(() => {
-                    $(seleccion1).css("background-image", "url(img/dorso.jpg)");
-                    seleccion1 = "";
-                    seleccion2 = "";
-                    seleccion1;
-                    return reinicio();
-                }, 500);
-            } else {
-                $(".audio")[0].play();
+            if (arrSrc[i] == "url(img/bomba.jpg)") {
+                // Si se añade el fondo de bomba, añadimos la clase bomba a este elemento
+                $(this).addClass("bomba"); // Lo malo, es que se vería inspeccionando elementos PROVISIONAL
             }
-        } else {
-            if (seleccion1 != e.target) {
-                seleccion2 = e.target;
+        });
+    }
 
-                if ($(seleccion2).hasClass("bomba")) {
+    arrCartas.forEach((element) => {
+        $(element).click(function comparar(e) {
+            if (seleccion1 == "") {
+                seleccion1 = e.target;
+
+                if ($(seleccion1).hasClass("bomba")) {
                     $(".audio")[3].play();
-                    $(seleccion2).removeClass("bomba");
-
+                    $(seleccion1).removeClass("bomba");
                     setTimeout(() => {
                         $(seleccion1).css("background-image", "url(img/dorso.jpg)");
-                        $(seleccion2).css("background-image", "url(img/dorso.jpg)");
                         seleccion1 = "";
                         seleccion2 = "";
                         seleccion1;
-                        return reinicio();
+                        return reinicioBomba();
                     }, 500);
                 } else {
                     $(".audio")[0].play();
+                }
+            } else {
+                if (seleccion1 != e.target) {
+                    seleccion2 = e.target;
 
-                    if ($(seleccion1).css("background-image") === $(seleccion2).css("background-image")) {
-                        
-                        $(seleccion1).addClass("sombreado");
-                        $(seleccion2).addClass("sombreado");
+                    if ($(seleccion2).hasClass("bomba")) {
+                        $(".audio")[3].play();
+                        $(seleccion2).removeClass("bomba");
 
-                        $(".audio")[1].play();
-
-                        seleccion1 = "";
-                        seleccion2 = "";
-
-                        puntuacion++;
-
-                        $("#alerts").html(msgRight);
-                        $("#marcador").val(puntuacion);
-
-                        if ($("#marcador").val() == 7) {
-                            alert(msgWin + $("#errores").val());
-
-                            if ($("#erroresGanador").val() >= $("#errores").val()) {
-                                let usuarioErrores = usuario + "&" + $("#errores").val();
-                                localStorage.setItem("ganador", usuarioErrores.toString());
-                            }
-
-                            location.reload();
-                        }
-                    } else {
                         setTimeout(() => {
-                            if ($(seleccion1).hasClass("sombreado")) {
-                                $(seleccion2).css("background-image", "url(img/dorso.jpg)");
-                                $(".audio")[2].play();
-                            } else if ($(seleccion2).hasClass("sombreado")) {
-                                $(seleccion1).css("background-image", "url(img/dorso.jpg)");
-                                $(".audio")[2].play();
-                            } else {
-                                $(seleccion1).css("background-image", "url(img/dorso.jpg)");
-                                $(seleccion2).css("background-image", "url(img/dorso.jpg)");
-                                $(".audio")[2].play();
-                            }
+                            $(seleccion1).css("background-image", "url(img/dorso.jpg)");
+                            $(seleccion2).css("background-image", "url(img/dorso.jpg)");
+                            seleccion1 = "";
+                            seleccion2 = "";
+                            seleccion1;
+                            return reinicio(true);
+                        }, 500);
+                    } else {
+                        $(".audio")[0].play();
+
+                        if ($(seleccion1).css("background-image") === $(seleccion2).css("background-image")) {
+
+                            $(seleccion1).addClass("sombreado");
+                            $(seleccion2).addClass("sombreado");
+
+                            $(".audio")[1].play();
 
                             seleccion1 = "";
                             seleccion2 = "";
 
-                            $("#alerts").html(msgWrong);
+                            puntuacion++;
 
-                            contadorErr++;
+                            $("#alerts").html(msgRight);
+                            $("#marcador").val(puntuacion);
 
-                            $("#errores").val(contadorErr);
-                        }, 500);
+                            cambiarProgreso(puntuacion);
+
+                            if ($("#marcador").val() == 7) {
+                                alert(msgWin + $("#errores").val());
+
+                                if ($("#erroresGanador").val() >= $("#errores").val()) {
+                                    let usuarioErrores = usuario + "&" + $("#errores").val();
+                                    localStorage.setItem("ganador", usuarioErrores.toString());
+                                }
+
+                                location.reload();
+                            }
+                        } else {
+                            setTimeout(() => {
+                                if ($(seleccion1).hasClass("sombreado")) {
+                                    $(seleccion2).css("background-image", "url(img/dorso.jpg)");
+                                    $(".audio")[2].play();
+                                } else if ($(seleccion2).hasClass("sombreado")) {
+                                    $(seleccion1).css("background-image", "url(img/dorso.jpg)");
+                                    $(".audio")[2].play();
+                                } else {
+                                    $(seleccion1).css("background-image", "url(img/dorso.jpg)");
+                                    $(seleccion2).css("background-image", "url(img/dorso.jpg)");
+                                    $(".audio")[2].play();
+                                }
+
+                                seleccion1 = "";
+                                seleccion2 = "";
+
+                                $("#alerts").html(msgWrong);
+
+                                contadorErr++;
+
+                                $("#errores").val(contadorErr);
+                            }, 500);
+                        }
                     }
                 }
             }
-        }
+        });
     });
 });
+
+$('#btnReplay').click({bomba: false}, reinicio);
+
 
 function setGanador(c) {
     let arrGanador = c.split("&");
@@ -182,13 +194,13 @@ function reinicio() {
 
 
     for (let i = 0; i < arrCartas.length; i++) {
-       const carta = arrCartas[i]; 
-       
+        const carta = arrCartas[i];
+
         $(carta).removeClass("sombredo");
         $(carta).removeClass("sombreado");
         $(carta).css("background-image", "url(img/dorso.jpg)");
-        
-        
+
+
         $(carta).click(function () {
             $(this).css("background-image", arrSrc[i]);
 
@@ -197,9 +209,51 @@ function reinicio() {
                 $(this).addClass("bomba"); // Lo malo, es que se vería inspeccionando elementos PROVISIONAL
             }
         });
-    }
+    } 
+        contadorErr = 0;
+        $("#errores").val(contadorErr);
+     
+
     puntuacion = 0;
+    cambiarProgreso(puntuacion);
     $("#marcador").val(puntuacion);
+
+}
+
+function reinicioBomba(){
+    arrSrc.sort(function () {
+        return Math.random() - 0.5;
+    });
+
+
+    for (let i = 0; i < arrCartas.length; i++) {
+        const carta = arrCartas[i];
+
+        $(carta).removeClass("sombredo");
+        $(carta).removeClass("sombreado");
+        $(carta).css("background-image", "url(img/dorso.jpg)");
+
+
+        $(carta).click(function () {
+            $(this).css("background-image", arrSrc[i]);
+
+            if (arrSrc[i] == "url(img/bomba.jpg)") {
+                // Si se añade el fondo de bomba, añadimos la clase bomba a este elemento
+                $(this).addClass("bomba"); // Lo malo, es que se vería inspeccionando elementos PROVISIONAL
+            }
+        });
+    } 
+
+    puntuacion = 0;
+    cambiarProgreso(puntuacion);
+    $("#marcador").val(puntuacion);
+
+}
+
+
+function cambiarProgreso(punt) {
+
+    $('#progress').css('width', arrProgress[punt]);
 }
 
 if (!localStorage.getItem("idioma")) {
