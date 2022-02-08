@@ -53,19 +53,18 @@ const arrSrc = [
     "url(img/bomba.jpg)",
 ];
 
-const arrProgress = ["0%", "16.66%", "33.34%", "50%", "66.66%", "83.33%", "100%"];
+const arrProgress = ["0%", "14.27%", "28.57%", "42.85%", "57.14%", "71.43%", "85.71%", "100%"];
 
-//Variables con las que se trabajará las selecciones y puntos
 let seleccion1 = "";
 let seleccion2 = "";
 let puntuacion = 0;
 let contadorErr = 0;
-$()
-$('#btnStart').click(function startGame() {
+
+$('#btnComenzar').click(function startGame() {
     $('#btnStart').css('display', 'none');
     $('#btnReplay').css('display', 'inherit');
 
-    usuario = prompt("Escribe tu nombre de usuario: ");
+    usuario = $('#usuario').val();
     $("#usu").html(usuario);
     //Añadir la función de dar la vuelta a la carta
     //Se asigna al azar una posición del array de las URL a cada una de las cartas
