@@ -75,8 +75,8 @@ $('#btnComenzar').click(function startGame() {
             $(this).css("background-image", arrSrc[i]);
 
             if (arrSrc[i] == "url(img/bomba.jpg)") {
-                // Si se añade el fondo de bomba, añadimos la clase bomba a este elemento
-                $(this).addClass("bomba"); // Lo malo, es que se vería inspeccionando elementos PROVISIONAL
+                // Si se añade el fondo de bomba, añadimos el dato bomba a este elemento
+                $(this).data("bomba", true); //Añadimos el DATA para que no se pueda ver cual es
             }
         });
     }
@@ -86,9 +86,9 @@ $('#btnComenzar').click(function startGame() {
             if (seleccion1 == "") {
                 seleccion1 = e.target;
 
-                if ($(seleccion1).hasClass("bomba")) {
+                if ($(seleccion1).data("bomba")) {
                     $(".audio")[3].play();
-                    $(seleccion1).removeClass("bomba");
+                    $(seleccion1).removeData("bomba");
                     setTimeout(() => {
                         $(seleccion1).css("background-image", "url(img/dorso.jpg)");
                         seleccion1 = "";
@@ -103,9 +103,9 @@ $('#btnComenzar').click(function startGame() {
                 if (seleccion1 != e.target) {
                     seleccion2 = e.target;
 
-                    if ($(seleccion2).hasClass("bomba")) {
+                    if ($(seleccion2).data("bomba")) {
                         $(".audio")[3].play();
-                        $(seleccion2).removeClass("bomba");
+                        $(seleccion2).removeData("bomba");
 
                         setTimeout(() => {
                             $(seleccion1).css("background-image", "url(img/dorso.jpg)");
@@ -113,7 +113,7 @@ $('#btnComenzar').click(function startGame() {
                             seleccion1 = "";
                             seleccion2 = "";
                             seleccion1;
-                            return reinicio(true);
+                            return reinicioBomba();
                         }, 500);
                     } else {
                         $(".audio")[0].play();
@@ -176,7 +176,7 @@ $('#btnComenzar').click(function startGame() {
     });
 });
 
-$('#btnReplay').click({bomba: false}, reinicio);
+$('#btnReplay').click(reinicio);
 
 
 function setGanador(c) {
@@ -220,9 +220,9 @@ function reinicio() {
 }
 
 function reinicioBomba(){
-    arrSrc.sort(function () {
+    /*arrSrc.sort(function () {
         return Math.random() - 0.5;
-    });
+    });*/
 
 
     for (let i = 0; i < arrCartas.length; i++) {
@@ -232,7 +232,7 @@ function reinicioBomba(){
         $(carta).removeClass("sombreado");
         $(carta).css("background-image", "url(img/dorso.jpg)");
 
-
+/* Las cartas se quedan en el mismo sitio pero se reinicia el juego y la puntuación
         $(carta).click(function () {
             $(this).css("background-image", arrSrc[i]);
 
@@ -240,7 +240,7 @@ function reinicioBomba(){
                 // Si se añade el fondo de bomba, añadimos la clase bomba a este elemento
                 $(this).addClass("bomba"); // Lo malo, es que se vería inspeccionando elementos PROVISIONAL
             }
-        });
+        });*/
     } 
 
     puntuacion = 0;
