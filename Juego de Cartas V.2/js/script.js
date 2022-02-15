@@ -15,52 +15,16 @@ if (localStorage.getItem("ganador")) {
 }
 
 //Array de las cartas
-const arrCartas = [
-  $("#carta1")[0],
-  $("#carta2")[0],
-  $("#carta3")[0],
-  $("#carta4")[0],
-  $("#carta5")[0],
-  $("#carta6")[0],
-  $("#carta7")[0],
-  $("#carta8")[0],
-  $("#carta9")[0],
-  $("#carta10")[0],
-  $("#carta11")[0],
-  $("#carta12")[0],
-  $("#carta13")[0],
-  $("#carta14")[0],
-  $("#carta15")[0],
-];
+const arrCartas = [$("#carta1")[0], $("#carta2")[0], $("#carta3")[0], $("#carta4")[0], $("#carta5")[0], $("#carta6")[0], $("#carta7")[0], 
+$("#carta8")[0], $("#carta9")[0], $("#carta10")[0], $("#carta11")[0], $("#carta12")[0], $("#carta13")[0], $("#carta14")[0], $("#carta15")[0] ];
 
 //Array con las url de las cartas
-const arrSrc = [
-  "url(img/mtg1.jpg)",
-  "url(img/mtg2.jpg)",
-  "url(img/mtg3.jpg)",
-  "url(img/mtg4.jpg)",
-  "url(img/mtg5.jpg)",
-  "url(img/mtg6.jpg)",
-  "url(img/mtg1.jpg)",
-  "url(img/mtg2.jpg)",
-  "url(img/mtg3.jpg)",
-  "url(img/mtg4.jpg)",
-  "url(img/mtg5.jpg)",
-  "url(img/mtg6.jpg)",
-  "url(img/mtg7.jpg)",
-  "url(img/mtg7.jpg)",
-  "url(img/bomba.jpg)",
-];
+const arrSrc = [ "img/mtg1.jpg", "img/mtg2.jpg", "img/mtg3.jpg", "img/mtg4.jpg", "img/mtg5.jpg",
+  "img/mtg6.jpg", "img/mtg1.jpg", "img/mtg2.jpg", "img/mtg3.jpg", "img/mtg4.jpg", "img/mtg5.jpg",
+  "img/mtg6.jpg", "img/mtg7.jpg","img/mtg7.jpg", "img/bomba.jpg"];
 
 const arrProgress = [
-  "0%",
-  "14.27%",
-  "28.57%",
-  "42.85%",
-  "57.14%",
-  "71.43%",
-  "85.71%",
-  "100%",
+  "0%", "14.27%", "28.57%", "42.85%", "57.14%", "71.43%","85.71%", "100%",
 ];
 
 let seleccion1 = "";
@@ -69,10 +33,12 @@ let puntuacion = 0;
 let contadorErr = 0;
 
 $("#btnComenzar").click(function startGame() {
-    
+
+  reinicio();
+
   $("#btnStart").off();
   $("#btnStart").css("display", "none");
-
+  
   $("#btnReplay").css("display", "inherit");
 
   usuario = $("#usuario").val();
@@ -83,9 +49,13 @@ $("#btnComenzar").click(function startGame() {
   for (let i = 0; i < arrCartas.length; i++) {
     const carta = arrCartas[i];
     $(carta).click(function () {
-      $(this).css("background-image", arrSrc[i]);
+      $(this).attr("src", arrSrc[i]);
+     // $(this).fadeOut(200, function(){
+      //  $(this).attr("src", arrSrc[i]).delay(200);     
+     // });
+      //$(this).fadeIn(200);
 
-      if (arrSrc[i] == "url(img/bomba.jpg)") {
+      if (arrSrc[i] == "img/bomba.jpg") {
         // Si se añade el fondo de bomba, añadimos el dato bomba a este elemento
         $(this).data("bomba", true); //Añadimos el DATA para que no se pueda ver cual es
       }
@@ -98,14 +68,16 @@ $("#btnComenzar").click(function startGame() {
         seleccion1 = e.target;
 
         if ($(seleccion1).data("bomba")) {
+
           $(".audio")[3].play();
           $(seleccion1).removeData("bomba");
+          
           setTimeout(() => {
-            $(seleccion1).css("background-image", "url(img/dorso.jpg)");
+            $(seleccion1).attr("src", "img/dorso.jpg");
             seleccion1 = "";
             seleccion2 = "";
             seleccion1;
-            return reinicio();
+            return bomba();
           }, 500);
         } else {
           $(".audio")[0].play();
@@ -119,22 +91,21 @@ $("#btnComenzar").click(function startGame() {
             $(seleccion2).removeData("bomba");
 
             setTimeout(() => {
-              $(seleccion1).css("background-image", "url(img/dorso.jpg)");
-              $(seleccion2).css("background-image", "url(img/dorso.jpg)");
+              $(seleccion1).attr("src", "img/dorso.jpg");
+              $(seleccion2).attr("src", "img/dorso.jpg");
               seleccion1 = "";
               seleccion2 = "";
               seleccion1;
-              return reinicio();
+              return bomba();
             }, 500);
           } else {
             $(".audio")[0].play();
 
-            if (
-              $(seleccion1).css("background-image") ===
-              $(seleccion2).css("background-image")
-            ) {
+            if ( $(seleccion1).attr("src") === $(seleccion2).attr("src") ) {
               $(seleccion1).addClass("sombreado");
+              
               $(seleccion2).addClass("sombreado");
+                
 
               $(".audio")[1].play();
 
@@ -161,14 +132,15 @@ $("#btnComenzar").click(function startGame() {
             } else {
               setTimeout(() => {
                 if ($(seleccion1).hasClass("sombreado")) {
-                  $(seleccion2).css("background-image", "url(img/dorso.jpg)");
+                  $(seleccion2).attr("src", "img/dorso.jpg");
                   $(".audio")[2].play();
                 } else if ($(seleccion2).hasClass("sombreado")) {
-                  $(seleccion1).css("background-image", "url(img/dorso.jpg)");
+                  $(seleccion1).attr("src", "img/dorso.jpg");
                   $(".audio")[2].play();
                 } else {
-                  $(seleccion1).css("background-image", "url(img/dorso.jpg)");
-                  $(seleccion2).css("background-image", "url(img/dorso.jpg)");
+                  
+                  $(seleccion1).attr("src", "img/dorso.jpg");
+                  $(seleccion2).attr("src", "img/dorso.jpg");
                   $(".audio")[2].play();
                 }
 
@@ -189,14 +161,6 @@ $("#btnComenzar").click(function startGame() {
   });
 });
 
-$("#btnReplay").on(
-  "click",
-  {
-    replay: true,
-  },
-  reinicio
-); //Añadimos un ON aquí para que el parametro bomba sea false, lo que reiniciaría el juego por completo
-
 function setGanador(c) {
   let arrGanador = c.split("&");
 
@@ -204,8 +168,7 @@ function setGanador(c) {
   $("#winner").html(arrGanador[0]);
 }
 
-function reinicio(e) {
-  if (e.data.replay) {
+function reinicio() {
     //Si se ha hecho click en reinici, se reinicia el juego normalmente, si no, solo se dan la vuelta
     arrSrc.sort(function () {
       return Math.random() - 0.5;
@@ -215,35 +178,43 @@ function reinicio(e) {
 
       $(carta).removeClass("sombredo");
       $(carta).removeClass("sombreado");
-      $(carta).css("background-image", "url(img/dorso.jpg)");
+      $(carta).attr("src", "img/dorso.jpg");
 
       $(carta).click(function () {
-        $(this).css("background-image", arrSrc[i]);
+        $(this).attr("src", arrSrc[i]);
 
-        if (arrSrc[i] == "url(img/bomba.jpg)") {
-          // Si se añade el fondo de bomba, añadimos la clase bomba a este elemento
-          $(this).addClass("bomba"); // Lo malo, es que se vería inspeccionando elementos PROVISIONAL
+        if (arrSrc[i] == "img/bomba.jpg") {
+          // Si se añade el fondo de bomba, añadimos el dato bomba
+          $(this).data("bomba", true); 
         }
       });
     }
     contadorErr = 0;
     $("#errores").val(contadorErr);
-  } else {
 
-    //Dar la vuelta a las cartas porque se reinicia mediante la bomba
+    puntuacion = 0;
+    cambiarProgreso(puntuacion);
+    $("#marcador").val(puntuacion);
 
-    for (let i = 0; i < arrCartas.length; i++) {
-      const carta = arrCartas[i];
+}
 
-      $(carta).removeClass("sombredo");
-      $(carta).removeClass("sombreado");
-      $(carta).css("background-image", "url(img/dorso.jpg)");
-    }
-  }
-
-  puntuacion = 0;
-  cambiarProgreso(puntuacion);
-  $("#marcador").val(puntuacion);
+function bomba(){
+     //Dar la vuelta a las cartas porque se reinicia mediante la bomba
+     for (let i = 0; i < arrCartas.length; i++) {
+        const carta = arrCartas[i];
+  
+        $(carta).removeClass("sombredo");
+        $(carta).removeClass("sombreado");
+        $(carta).attr("src", "img/dorso.jpg");
+      }
+  
+      contadorErr++;
+      $("#errores").val(contadorErr);
+  
+      puntuacion = 0;
+      cambiarProgreso(puntuacion);
+      $("#marcador").val(puntuacion);
+      $(".tablero").effect("bounce", "fast");
 }
 
 function cambiarProgreso(punt) {

@@ -1,0 +1,158 @@
+@import url("https://fonts.googleapis.com/css2?family=Righteous&display=swap");
+.img-fluid {
+  border-radius: 5px;
+}
+
+* {
+  font-family: "Righteous", cursive;
+}
+
+body {
+  background-image: url("../img/background.jpg");
+}
+
+header {
+  background-color: rgba(247, 202, 201, 0.719);
+  padding: 10px;
+}
+
+#juego {
+  border: 1px solid black;
+}
+
+#juego div {
+  border: 1px solid black;
+}
+
+footer {
+  text-align: center;
+  background-color: thistle;
+  padding: 2%;
+}
+
+.carta {
+  border-radius: 10px;
+  width: 144px;
+  height: 200px;
+}
+
+/*.contenedorCartas {
+  display: grid;
+  grid-template-columns: 144px 144px 144px 144px 144px;
+  grid-template-rows: 200px 200px 200px;
+  grid-gap: 10px;
+  justify-content: center;
+  margin-right: 10px;
+}*/
+.cabecera {
+  height: 100px;
+}
+
+.cabecera img {
+  height: 100px;
+}
+
+#tabla1 {
+  margin: 1%;
+  margin-top: 5%;
+  margin-bottom: 25%;
+}
+
+#tabla2 {
+  margin: 1%;
+}
+
+.mensajes {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: space-around;
+  height: 100%;
+}
+
+.enlace {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: space-around;
+}
+
+.titulo_largo {
+  font-size: 0.7em !important;
+}
+
+.card-text {
+  font-size: 0.7em !important;
+}
+
+/*.juego {
+  @include flex;
+  justify-content: space-around;
+
+}*/
+.informacion-general {
+  text-align: center;
+  border-radius: 10px;
+  color: white;
+  background-repeat: no-repeat;
+  background-size: auto;
+  border: 2px solid black;
+  overflow: auto;
+  background-image: url("../img/fondo.jpg");
+}
+
+.informacion-bomba {
+  text-align: center;
+  border-radius: 10px;
+  color: white;
+  background-repeat: no-repeat;
+  background-size: auto;
+  border: 2px solid black;
+  overflow: auto;
+  background-image: url("../img/fondo_bomba.jpg");
+}
+
+.informacion-dificultad {
+  text-align: center;
+  border-radius: 10px;
+  color: white;
+  background-repeat: no-repeat;
+  background-size: auto;
+  border: 2px solid black;
+  overflow: auto;
+  background-image: url("../img/fondo_dificultad.jpg");
+}
+
+.informacion-general::-moz-selection {
+  color: red;
+  /**Este tipo de letra ya se encuentra en negrita por defecto por lo que no se puede poner en negrita*/
+}
+
+.informacion-general::selection {
+  color: red;
+  /**Este tipo de letra ya se encuentra en negrita por defecto por lo que no se puede poner en negrita*/
+}
+
+.invisible {
+  display: none;
+}
+
+.sombreado {
+  box-shadow: 11px 11px 15px 5px #000000, -5px -5px 15px 5px #3B3B3B;
+}
+
+#minititle {
+  display: none;
+}
+
+@media (max-width: 780px) {
+  #tabla1 {
+    margin: 1%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+  }
+}
+.sonido {
+  display: none;
+}
+/*# sourceMappingURL=style2.css.map *//*# sourceMappingURL=style2.css.map */
