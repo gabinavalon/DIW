@@ -40,7 +40,7 @@
 </head>
 
 <body>
-    <header class="row mb-3">
+    <header class="row mb-3 sticky-top">
         <div class="col-2" id="logo">
             <a href="#" class=""><img src="img/favicon\android-icon-72x72.png" alt="logo" id="logo"></a>
         </div>
@@ -65,7 +65,7 @@
     </header>
 
     <div class="container">
-        <nav style="background-color: brown;">
+        <nav class="col"style="background-color: brown;">
 
             <div class="row">
                 <div class="col-12 col-sm-2 " id="botones">
@@ -105,16 +105,22 @@
                             </th>
                         </tr>
                         <tr>
-                            <th>
-                                Puntuación <i class="fas fa-trophy"></i>
+                            <th id="score">
+                                Puntuación 
                             </th>
                             <th>
-                                Errores <i class="fas fa-skull"></i>
+                                <i class="fas fa-trophy"></i>
+                            </th>
+                            <th  id="errors">
+                                Errores 
+                            </th>
+                            <th>
+                                <i class="fas fa-skull"></i>
                             </th>
                         </tr>
                         <tr>
-                            <td><input type="text" value="0" id="marcador" disabled size="2"></td>
-                            <td><input type="text" value="0" id="errores" disabled size="2"></td>
+                            <td colspan="2"><input type="text" value="0" id="marcador" disabled size="4"></td>
+                            <td colspan="2"><input type="text" value="0" id="errores" disabled size="4"></td>
                         </tr>
                     </table>
                 </div>
@@ -160,7 +166,7 @@
 
             <section class="col-sm-12 col-md-9 col-lg-9">
                 <div class="container">
-                    <div class="row justify-content-center">
+                    <div class="row justify-content-center tablero">
 
                             <div class="col-3 col-sm-3 col-md-3 col-lg-2 m-1 ">
                                 <img class="img" src="img/dorso.jpg" alt="dorso de carta" id="carta1"
@@ -228,7 +234,9 @@
             </section>
         </main>
     </div>
-        <footer class="row- justify-content-center mt-3">
+
+
+        <footer class="justify-content-center mt-5">
 
             Gabriel Navalón Soriano --- MTGMemoryGame
         </footer>

@@ -19,9 +19,15 @@
 
 }
 
-
+.img{
+  border-radius: 5px ;
+}
 body {
-  background-image: url("../img/background.jpg");
+  background: url("../img/background.jpg") no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 header{
@@ -40,8 +46,10 @@ header{
 
 footer{
   text-align: center;
-  background-color: thistle;
+  background: rgb(0,0,0);
+  background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(9,17,121,0.4514180672268907) 25%, rgba(7,150,9,1) 50%, rgba(214,78,78,1) 75%, rgba(255,255,255,1) 100%);
   padding: 2%;
+  color: white;
 }
 
 .carta {
@@ -142,14 +150,6 @@ footer{
   display: none;
 }
 
-
-@media (max-width: 780px) {
-  #tabla1{
-    margin: 1%;
-    margin-top: 5%;
-    margin-bottom: 5%;
-  }
-}
 .sonido {
   display: none;
 }/*# sourceMappingURL=style2.css.map */

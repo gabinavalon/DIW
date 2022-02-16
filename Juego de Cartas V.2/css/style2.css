@@ -7,8 +7,13 @@
   font-family: "Righteous", cursive;
 }
 
+.img {
+  border-radius: 5px;
+}
+
 body {
-  background-image: url("../img/background.jpg");
+  background: url("../img/background.jpg") no-repeat center center fixed;
+  background-size: cover;
 }
 
 header {
@@ -26,8 +31,10 @@ header {
 
 footer {
   text-align: center;
-  background-color: thistle;
+  background: black;
+  background: linear-gradient(90deg, black 0%, rgba(9, 17, 121, 0.4514180672) 25%, #079609 50%, #d64e4e 75%, white 100%);
   padding: 2%;
+  color: white;
 }
 
 .carta {
@@ -145,13 +152,6 @@ footer {
   display: none;
 }
 
-@media (max-width: 780px) {
-  #tabla1 {
-    margin: 1%;
-    margin-top: 5%;
-    margin-bottom: 5%;
-  }
-}
 .sonido {
   display: none;
 }
