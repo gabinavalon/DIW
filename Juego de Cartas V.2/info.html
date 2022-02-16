@@ -42,31 +42,32 @@
 </head>
 
 <body>
-    <div class="container-fluid">
-        <header class="row mb-3">
-            <div class="col-2" id="logo">
-                <a href="#" class=""><img src="img/favicon\android-icon-72x72.png" alt="logo" id="logo"></a>
+        <header class="navbar navbar-expand-lg navbar-light bg-light mb-3">
+            <a class="navbar-brand" href="#">
+                <img src="img/favicon\android-icon-144x144.png" width="35" height="35" class="d-inline-block align-top" alt="">
+                MTG Card Game</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                  <a class="nav-link" href="MTGCardGame.html">Juego </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="info.html">Información <span class="sr-only">(current)</span></a>
+                </li>
+              </ul>       
             </div>
-            <div class="col-3 enlace">
-                <a href="MTGCardGame.html" style="justify-content: center; align-items:center">Juego</a>
-            </div>
-            <div class="col-3 enlace">
-                <a href="info.html">Información</a>
-            </div>
-            <div class="col-4 enlace" id="idioma">
-                <table class="table-danger">
-                    <tr>
-                        <th colspan="2" id="language">Idioma</th>
-                    </tr>
-                    <tr>
-                        <td><button id="btnES" class="btn btn-outline-dark">ES</button></td>
-
-                        <td><button id="btnEN" class="btn btn-outline-dark">EN</button></td>
-                    </tr>
-                </table>
-            </div>
-        </header>
-    </div>
+            <table class="table-danger">
+                <tr>
+                    <th colspan="2" id="language">Idioma</th>
+                    <td><button id="btnES" class="btn btn-outline-dark">ES</button></td>
+                    <td><button id="btnEN" class="btn btn-outline-dark">EN</button></td>
+                </tr>
+            </table>
+          </header>
 
     <main>
         <div class="container">
@@ -141,7 +142,13 @@
                             Ten cuidado, pues si haces click en la carta bomba, ¡el juego se reiniciará! La bomba permanecerá en el mismo sitio, pero tendrás que recordar donde estaban las cartas para intentar tener el mínimo de fallos posibles.
                         </section>
                         <section class="row informacion-dificultad mt-1">
-                            Hay tres tipos de dificultades, en el modo fácil, podrás ver el tablero durante unos segundos. En el modo normal, aparecerá la bomba durante unos instantes, en el modo difícil, ¡no verás nada!
+                            Hay tres tipos de dificultades <br>
+                            (Haz click en cada uno para ver una breve descripción)
+                            <a tabindex="0"   data-toggle="popover" data-trigger="focus" title="Dificultad fácil" data-content="Aparecerá un botón de ayuda que mostrará el tablero durante dos segundos, ¡solo puedes usarlo una vez!"><span class="dificultades">Fácil</span></a>
+                            <a tabindex="1" data-toggle="popover" data-trigger="focus" title="Dificultad media" data-content="Durante dos segundos verás donde se encuentra la bomba, ¡intenta recordar donde está!"><span class="dificultades">Medio</span></a>
+                            <a tabindex="2"  data-toggle="popover" data-trigger="focus" title="Dificultad difícil" data-content="No verás donde se encuentra la bomba, así que cuidado, si te encuentras con ella, intentar recordar donde estaba todo colocado"><span class="dificultades">Difícil</span></a>
+                            <a tabindex="3"  data-toggle="popover" data-trigger="focus" title="Dificultad Leyenda" data-content="Verás donde está la bomba durante un segundo, pero si cometes tres fallos, ¡fin de la partida!"><span class="dificultades">Leyenda</span></a>
+                            
                         </section>
                     </div>
                 </aside>
@@ -155,9 +162,9 @@
 
     <!--Contenedor general de toda la página-->
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="js/script.js"></script>
 
 </body>

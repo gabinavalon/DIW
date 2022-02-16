@@ -3,11 +3,21 @@ let msgWrong;
 let msgWin;
 let usuario;
 
-$(document).ready(function () {
+$(function () {
+  $('[data-toggle="popover"]').popover()
+})
+
+$(function () {
+  $('.example-popover').popover({
+    container: 'body'
+  })
+})
+
+/*$(document).ready(function () {
   arrSrc.sort(function () {
     return Math.random() - 0.5;
   });
-});
+});*/
 
 if (localStorage.getItem("ganador")) {
   let cookieganador = localStorage.getItem("ganador"); // El local storage lo dejamos igual con Jquery¿?
@@ -34,8 +44,6 @@ let contadorErr = 0;
 
 $("#btnComenzar").click(function startGame() {
 
-  reinicio();
-
   $("#btnStart").off();
   $("#btnStart").css("display", "none");
   
@@ -43,10 +51,21 @@ $("#btnComenzar").click(function startGame() {
 
   usuario = $("#usuario").val();
   $("#usu").html(usuario);
-  //Añadir la función de dar la vuelta a la carta
-  //Se asigna al azar una posición del array de las URL a cada una de las cartas
 
-  for (let i = 0; i < arrCartas.length; i++) {
+  //Dificultad
+ 
+  var dificultad = $("input[name='dificultad']:checked").val();
+  if(!dificultad){
+    dificultad="medium";
+  }
+ 
+  //Dependiendo de la dificultad, ejecutaremos un comienzo distinto:
+
+  //startDificultad(dificultad);
+
+  reinicio(dificultad);
+
+  /*for (let i = 0; i < arrCartas.length; i++) {
     const carta = arrCartas[i];
     $(carta).click(function () {
       $(this).attr("src", arrSrc[i]);
@@ -54,13 +73,12 @@ $("#btnComenzar").click(function startGame() {
       //  $(this).attr("src", arrSrc[i]).delay(200);     
      // });
       //$(this).fadeIn(200);
-
       if (arrSrc[i] == "img/bomba.jpg") {
         // Si se añade el fondo de bomba, añadimos el dato bomba a este elemento
         $(this).data("bomba", true); //Añadimos el DATA para que no se pueda ver cual es
       }
     });
-  }
+  }*/
 
   arrCartas.forEach((element) => {
     $(element).click(function comparar(e) {
@@ -115,6 +133,9 @@ $("#btnComenzar").click(function startGame() {
               puntuacion++;
 
               $("#alerts").html(msgRight);
+              $("#alerts").removeClass("alert-dark");
+              $("#alerts").removeClass("alert-danger");
+              $("#alerts").addClass("alert-info");
               $("#marcador").val(puntuacion);
 
               cambiarProgreso(puntuacion);
@@ -122,12 +143,26 @@ $("#btnComenzar").click(function startGame() {
               if ($("#marcador").val() == 7) {
                 alert(msgWin + $("#errores").val());
 
-                if ($("#erroresGanador").val() >= $("#errores").val()) {
-                  let usuarioErrores = usuario + "&" + $("#errores").val();
+                var erroresGanador = parseInt($("#erroresGanador").val());
+                var erroresJugador = parseInt($("#errores").val());
+
+                if (erroresGanador >= erroresJugador) {
+                  var usuarioErrores = usuario + "&" + erroresJugador;
+                  console.log(usuarioErrores);
                   localStorage.setItem("ganador", usuarioErrores.toString());
+                  setGanador(usuarioErrores.toString());
                 }
 
-                location.reload();
+
+                $(".img").off("click");
+
+                $("#alerts").html(msgWin + $("#errores").val());
+                $("#alerts").removeClass("alert-dark");
+                $("#alerts").removeClass("alert-danger");
+                $("#alerts").removeClass("alert-info");
+                $("#alerts").addClass("alert-success");
+
+               // location.reload();
               }
             } else {
               setTimeout(() => {
@@ -148,6 +183,10 @@ $("#btnComenzar").click(function startGame() {
                 seleccion2 = "";
 
                 $("#alerts").html(msgWrong);
+                $("#alerts").removeClass("alert-dark");
+                $("#alerts").removeClass("alert-info");
+                $("#alerts").addClass("alert-danger");
+
 
                 contadorErr++;
 
@@ -169,14 +208,16 @@ function setGanador(c) {
 }
 
 function reinicio() {
-    //Si se ha hecho click en reinici, se reinicia el juego normalmente, si no, solo se dan la vuelta
+    
+    //Desordenamos el array
     arrSrc.sort(function () {
       return Math.random() - 0.5;
     });
+
+    //Borramos los aciertos, se les pone el dorso a todas las cartas, se asigna la función a dar la vuelta y una es la bomba
     for (let i = 0; i < arrCartas.length; i++) {
       const carta = arrCartas[i];
 
-      $(carta).removeClass("sombredo");
       $(carta).removeClass("sombreado");
       $(carta).attr("src", "img/dorso.jpg");
 
@@ -184,17 +225,27 @@ function reinicio() {
         $(this).attr("src", arrSrc[i]);
 
         if (arrSrc[i] == "img/bomba.jpg") {
-          // Si se añade el fondo de bomba, añadimos el dato bomba
+
           $(this).data("bomba", true); 
         }
       });
     }
+    //En caso de reinicio, se eliminan errores y puntuación acumulada
     contadorErr = 0;
     $("#errores").val(contadorErr);
 
     puntuacion = 0;
     cambiarProgreso(puntuacion);
     $("#marcador").val(puntuacion);
+
+    $("#alerts").html("Start!");
+
+    $("#alerts").removeClass("alert-success");
+    $("#alerts").removeClass("alert-danger");
+    $("#alerts").removeClass("alert-info");
+    $("#alerts").addClass("alert-dark");
+
+
 
 }
 

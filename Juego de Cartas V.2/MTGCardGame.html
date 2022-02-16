@@ -40,43 +40,47 @@
 </head>
 
 <body>
-    <header class="row mb-3 sticky-top">
-        <div class="col-2" id="logo">
-            <a href="#" class=""><img src="img/favicon\android-icon-72x72.png" alt="logo" id="logo"></a>
+  
+    <header class="navbar navbar-expand-lg navbar-light bg-light mb-3">
+        <a class="navbar-brand" href="#">
+            <img src="img/favicon\android-icon-144x144.png" width="35" height="35" class="d-inline-block align-top" alt="">
+            MTG Card Game</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="MTGCardGame.html">Juego <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="info.html">Información</a>
+            </li>
+          </ul>       
         </div>
-        <div class="col-3 enlace">
-            <a href="MTGCardGame.html" style="justify-content: center; align-items:center">Juego</a>
-        </div>
-        <div class="col-3 enlace">
-            <a href="info.html">Información</a>
-        </div>
-        <div class="col-4 enlace" id="idioma">
-            <table class="table-danger">
-                <tr>
-                    <th colspan="2" id="language">Idioma</th>
-                </tr>
-                <tr>
-                    <td><button id="btnES" class="btn btn-outline-dark">ES</button></td>
-
-                    <td><button id="btnEN" class="btn btn-outline-dark">EN</button></td>
-                </tr>
-            </table>
-        </div>
-    </header>
+        <table class="table-danger">
+            <tr>
+                <th colspan="2" id="language">Idioma</th>
+                <td><button id="btnES" class="btn btn-outline-dark">ES</button></td>
+                <td><button id="btnEN" class="btn btn-outline-dark">EN</button></td>
+            </tr>
+        </table>
+      </header>
 
     <div class="container">
-        <nav class="col"style="background-color: brown;">
+        <nav class="col-11 ">
 
-            <div class="row">
-                <div class="col-12 col-sm-2 " id="botones">
+            <div class="row justify-content-center">
+                <div class="col-2 col-sm-2 mx-lg-1 mx-3 mt-1" id="botones">
                     <button type="button" class="btn btn-success btn-lg" id="btnStart" data-bs-toggle="modal"
                         data-bs-target="#exampleModal">Start</button>
                     <button type="button" class="btn btn-warning btn-lg" id="btnReplay" style="display: none;"
-                        data-bs-toggle="modal" data-bs-target="#exampleModal">Reiniciar</button>
+                        data-bs-toggle="modal" data-bs-target="#exampleModal">Replay</button>
                 </div>
 
-                <div class="col-10">
-                    <div class="row mensajes" id="alerts">
+                <div class="col-10 col-sm-9">
+                    <div class="row mensajes alert alert-dark" role="alert" id="alerts">
                         (Los mensajes aparecerán aquí)
                     </div>
 
@@ -94,38 +98,45 @@
         </nav>
     </div>
 
-    <div class="container" id="juego" style="background-color: gray;">
+    <div class="container" id="juego" >
         <main class="row">
-            <aside class="col-sm-12 col-md-3 col-lg-3 tablas">
+            <aside class="col-sm-12 col-md-3 col-lg-2 tablas">
                 <div class="row" id="tabla1">
-                    <table class="table-danger" style="text-align: center;">
+                    <table class="table table-dark " style="text-align: center;">
                         <tr>
-                            <th colspan="2">
-                                <span id="usu"></span>
+                            <th colspan="2" >
+                                <span id="usu">Usuario</span>
                             </th>
                         </tr>
                         <tr>
-                            <th id="score">
+                            <td id="score">
                                 Puntuación 
-                            </th>
-                            <th>
+                            </td>
+                            <td>
                                 <i class="fas fa-trophy"></i>
-                            </th>
-                            <th  id="errors">
-                                Errores 
-                            </th>
-                            <th>
-                                <i class="fas fa-skull"></i>
-                            </th>
+                            </td>
                         </tr>
                         <tr>
+
+                        
                             <td colspan="2"><input type="text" value="0" id="marcador" disabled size="4"></td>
+                           
+                        </tr>
+                        <tr>
+                            <td  id="errors">
+                                Errores 
+                            </td>
+                            <td>
+                                <i class="fas fa-skull"></i>
+                            </td>
+                         </tr>
+                         <tr>   
                             <td colspan="2"><input type="text" value="0" id="errores" disabled size="4"></td>
                         </tr>
                     </table>
                 </div>
                 <div class="row" id="tabla2">
-                    <table class="table-danger">
+                    <table class="table table-dark mt-lg-5 ">
                         <tr>
                             <th colspan="3" style="text-align: center;">Ranking</th>
                         </tr>
@@ -164,7 +175,7 @@
 
             </aside>
 
-            <section class="col-sm-12 col-md-9 col-lg-9">
+            <section class="col-sm-12 col-md-9 col-lg-10">
                 <div class="container">
                     <div class="row justify-content-center tablero">
 
@@ -267,7 +278,7 @@
                 </div>
                 <div class="modal-body">
                     <input type="text" id="usuario" placeholder="Nombre jugador/a..."> <br><br>
-
+                    
                     <input type="radio" class="btn-check" name="dificultad" id="success-outlined" autocomplete="off"
                         value="easy">
                     <label class="btn btn-success" for="success-outlined">Easy</label>
@@ -279,7 +290,7 @@
                     <input type="radio" class="btn-check" name="dificultad" id="danger-outlined" autocomplete="off"
                         value="hard">
                     <label class="btn btn-danger" for="danger-outlined">Hard</label>
-
+                    <p>(La dificultad por defecto es la media)</p>
 
                 </div>
                 <div class="modal-footer">

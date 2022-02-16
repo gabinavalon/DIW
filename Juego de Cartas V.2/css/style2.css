@@ -1,13 +1,17 @@
 @import url("https://fonts.googleapis.com/css2?family=Righteous&display=swap");
-.img-fluid {
-  border-radius: 5px;
-}
-
 * {
   font-family: "Righteous", cursive;
 }
 
-.img {
+.dificultades:hover {
+  color: red;
+}
+
+.img, .img-fluid {
+  border-radius: 5px;
+}
+
+.img-fluid {
   border-radius: 5px;
 }
 
@@ -19,14 +23,6 @@ body {
 header {
   background-color: rgba(247, 202, 201, 0.719);
   padding: 10px;
-}
-
-#juego {
-  border: 1px solid black;
-}
-
-#juego div {
-  border: 1px solid black;
 }
 
 footer {
@@ -43,14 +39,6 @@ footer {
   height: 200px;
 }
 
-/*.contenedorCartas {
-  display: grid;
-  grid-template-columns: 144px 144px 144px 144px 144px;
-  grid-template-rows: 200px 200px 200px;
-  grid-gap: 10px;
-  justify-content: center;
-  margin-right: 10px;
-}*/
 .cabecera {
   height: 100px;
 }
@@ -62,11 +50,11 @@ footer {
 #tabla1 {
   margin: 1%;
   margin-top: 5%;
-  margin-bottom: 25%;
 }
 
 #tabla2 {
   margin: 1%;
+  font-size: 0.75em;
 }
 
 .mensajes {
@@ -92,42 +80,37 @@ footer {
   font-size: 0.7em !important;
 }
 
-/*.juego {
-  @include flex;
-  justify-content: space-around;
-
-}*/
 .informacion-general {
+  background: url("../img/background.jpg") no-repeat center center fixed;
+  background-size: cover;
   text-align: center;
   border-radius: 10px;
   color: white;
-  background-repeat: no-repeat;
-  background-size: auto;
   border: 2px solid black;
   overflow: auto;
-  background-image: url("../img/fondo.jpg");
+  background-image: url("../img/fondo.jpg") !important;
 }
 
 .informacion-bomba {
+  background: url("../img/background.jpg") no-repeat center center fixed;
+  background-size: cover;
   text-align: center;
   border-radius: 10px;
   color: white;
-  background-repeat: no-repeat;
-  background-size: auto;
   border: 2px solid black;
   overflow: auto;
-  background-image: url("../img/fondo_bomba.jpg");
+  background-image: url("../img/fondo_bomba.jpg") !important;
 }
 
 .informacion-dificultad {
+  background: url("../img/background.jpg") no-repeat center center fixed;
+  background-size: cover;
   text-align: center;
   border-radius: 10px;
   color: white;
-  background-repeat: no-repeat;
-  background-size: auto;
   border: 2px solid black;
   overflow: auto;
-  background-image: url("../img/fondo_dificultad.jpg");
+  background-image: url("../img/fondo_dificultad.jpg") !important;
 }
 
 .informacion-general::-moz-selection {
