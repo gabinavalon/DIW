@@ -46,8 +46,8 @@ header{
 
 footer{
   text-align: center;
-  background: rgb(0,0,0);
-  background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(9,17,121,0.4514180672268907) 25%, rgba(7,150,9,1) 50%, rgba(214,78,78,1) 75%, rgba(255,255,255,1) 100%);
+  background: rgb(243,247,255);
+  background: linear-gradient(90deg, rgba(243,247,255,0.10688025210084029) 0%, rgba(125,127,131,0) 16%, rgba(0,0,0,0.8071603641456583) 33%, rgba(0,0,0,1) 49%, rgba(0,0,0,0.8575805322128851) 66%, rgba(132,147,150,0) 86%, rgba(224,250,255,0.06766456582633051) 100%);
   padding: 2%;
   color: white;
 }
@@ -56,6 +56,10 @@ footer{
   border-radius: 10px;
   width: 144px;
   height: 200px;
+}
+
+.img:hover{
+  transform: scale(1.05) !important;
 }
 
 .cabecera {
@@ -105,10 +109,30 @@ footer{
     background-image: url("../img/fondo.jpg") !important;
 }
 
+.card{
+  @include fondo();
+  background-image: url("../img/fondo_cards.jpg") !important;
+  
+
+  .card-text{
+    color: antiquewhite !important;
+    font-family: 'Roboto Serif', sans-serif;
+  }
+  .card-header{
+    color: antiquewhite !important;
+  }
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 5px 10px
+}
+
 .informacion-bomba{
     @include fondo();
     @include informacion();
     background-image: url("../img/fondo_bomba.jpg") !important;
+    color: antiquewhite !important;
 }
 
 .informacion-dificultad{

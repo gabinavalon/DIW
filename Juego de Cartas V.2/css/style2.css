@@ -27,8 +27,8 @@ header {
 
 footer {
   text-align: center;
-  background: black;
-  background: linear-gradient(90deg, black 0%, rgba(9, 17, 121, 0.4514180672) 25%, #079609 50%, #d64e4e 75%, white 100%);
+  background: #f3f7ff;
+  background: linear-gradient(90deg, rgba(243, 247, 255, 0.1068802521) 0%, rgba(125, 127, 131, 0) 16%, rgba(0, 0, 0, 0.8071603641) 33%, black 49%, rgba(0, 0, 0, 0.8575805322) 66%, rgba(132, 147, 150, 0) 86%, rgba(224, 250, 255, 0.0676645658) 100%);
   padding: 2%;
   color: white;
 }
@@ -37,6 +37,10 @@ footer {
   border-radius: 10px;
   width: 144px;
   height: 200px;
+}
+
+.img:hover {
+  transform: scale(1.05) !important;
 }
 
 .cabecera {
@@ -91,6 +95,24 @@ footer {
   background-image: url("../img/fondo.jpg") !important;
 }
 
+.card {
+  background: url("../img/background.jpg") no-repeat center center fixed;
+  background-size: cover;
+  background-image: url("../img/fondo_cards.jpg") !important;
+}
+.card .card-text {
+  color: antiquewhite !important;
+  font-family: "Roboto Serif", sans-serif;
+}
+.card .card-header {
+  color: antiquewhite !important;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 5px 10px;
+}
+
 .informacion-bomba {
   background: url("../img/background.jpg") no-repeat center center fixed;
   background-size: cover;
@@ -100,6 +122,7 @@ footer {
   border: 2px solid black;
   overflow: auto;
   background-image: url("../img/fondo_bomba.jpg") !important;
+  color: antiquewhite !important;
 }
 
 .informacion-dificultad {
