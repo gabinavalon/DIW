@@ -4,20 +4,14 @@ let msgWin;
 let usuario;
 
 $(function () {
-  $('[data-toggle="popover"]').popover()
-})
+  $('[data-toggle="popover"]').popover();
+});
 
 $(function () {
-  $('.example-popover').popover({
-    container: 'body'
-  })
-})
-
-/*$(document).ready(function () {
-  arrSrc.sort(function () {
-    return Math.random() - 0.5;
+  $(".example-popover").popover({
+    container: "body",
   });
-});*/
+});
 
 if (localStorage.getItem("ganador")) {
   let cookieganador = localStorage.getItem("ganador"); // El local storage lo dejamos igual con Jquery¿?
@@ -25,16 +19,52 @@ if (localStorage.getItem("ganador")) {
 }
 
 //Array de las cartas
-const arrCartas = [$("#carta1")[0], $("#carta2")[0], $("#carta3")[0], $("#carta4")[0], $("#carta5")[0], $("#carta6")[0], $("#carta7")[0], 
-$("#carta8")[0], $("#carta9")[0], $("#carta10")[0], $("#carta11")[0], $("#carta12")[0], $("#carta13")[0], $("#carta14")[0], $("#carta15")[0] ];
+const arrCartas = [
+  $("#carta1")[0],
+  $("#carta2")[0],
+  $("#carta3")[0],
+  $("#carta4")[0],
+  $("#carta5")[0],
+  $("#carta6")[0],
+  $("#carta7")[0],
+  $("#carta8")[0],
+  $("#carta9")[0],
+  $("#carta10")[0],
+  $("#carta11")[0],
+  $("#carta12")[0],
+  $("#carta13")[0],
+  $("#carta14")[0],
+  $("#carta15")[0],
+];
 
 //Array con las url de las cartas
-const arrSrc = [ "img/mtg1.jpg", "img/mtg2.jpg", "img/mtg3.jpg", "img/mtg4.jpg", "img/mtg5.jpg",
-  "img/mtg6.jpg", "img/mtg1.jpg", "img/mtg2.jpg", "img/mtg3.jpg", "img/mtg4.jpg", "img/mtg5.jpg",
-  "img/mtg6.jpg", "img/mtg7.jpg","img/mtg7.jpg", "img/bomba.jpg"];
+const arrSrc = [
+  "img/mtg1.jpg",
+  "img/mtg2.jpg",
+  "img/mtg3.jpg",
+  "img/mtg4.jpg",
+  "img/mtg5.jpg",
+  "img/mtg6.jpg",
+  "img/mtg1.jpg",
+  "img/mtg2.jpg",
+  "img/mtg3.jpg",
+  "img/mtg4.jpg",
+  "img/mtg5.jpg",
+  "img/mtg6.jpg",
+  "img/mtg7.jpg",
+  "img/mtg7.jpg",
+  "img/bomba.jpg",
+];
 
 const arrProgress = [
-  "0%", "14.27%", "28.57%", "42.85%", "57.14%", "71.43%","85.71%", "100%",
+  "0%",
+  "14.27%",
+  "28.57%",
+  "42.85%",
+  "57.14%",
+  "71.43%",
+  "85.71%",
+  "100%",
 ];
 
 let seleccion1 = "";
@@ -43,53 +73,32 @@ let puntuacion = 0;
 let contadorErr = 0;
 
 $("#btnComenzar").click(function startGame() {
-
   $("#btnStart").off();
   $("#btnStart").css("display", "none");
-  
+
   $("#btnReplay").css("display", "inherit");
 
   usuario = $("#usuario").val();
   $("#usu").html(usuario);
 
   //Dificultad
- 
-  var dificultad = $("input[name='dificultad']:checked").val();
-  if(!dificultad){
-    dificultad="medium";
-  }
- 
-  //Dependiendo de la dificultad, ejecutaremos un comienzo distinto:
 
-  //startDificultad(dificultad);
+  var dificultad = $("input[name='dificultad']:checked").val();
+  if (!dificultad) {
+    dificultad = "medium";
+  }
 
   reinicio(dificultad);
-
-  /*for (let i = 0; i < arrCartas.length; i++) {
-    const carta = arrCartas[i];
-    $(carta).click(function () {
-      $(this).attr("src", arrSrc[i]);
-     // $(this).fadeOut(200, function(){
-      //  $(this).attr("src", arrSrc[i]).delay(200);     
-     // });
-      //$(this).fadeIn(200);
-      if (arrSrc[i] == "img/bomba.jpg") {
-        // Si se añade el fondo de bomba, añadimos el dato bomba a este elemento
-        $(this).data("bomba", true); //Añadimos el DATA para que no se pueda ver cual es
-      }
-    });
-  }*/
 
   arrCartas.forEach((element) => {
     $(element).click(function comparar(e) {
       if (seleccion1 == "") {
         seleccion1 = e.target;
-
+        console.log(seleccion1);
         if ($(seleccion1).data("bomba")) {
-
           $(".audio")[3].play();
           $(seleccion1).removeData("bomba");
-          
+
           setTimeout(() => {
             $(seleccion1).attr("src", "img/dorso.jpg");
             seleccion1 = "";
@@ -119,11 +128,10 @@ $("#btnComenzar").click(function startGame() {
           } else {
             $(".audio")[0].play();
 
-            if ( $(seleccion1).attr("src") === $(seleccion2).attr("src") ) {
+            if ($(seleccion1).attr("src") === $(seleccion2).attr("src")) {
               $(seleccion1).addClass("sombreado");
-              
+
               $(seleccion2).addClass("sombreado");
-                
 
               $(".audio")[1].play();
 
@@ -153,7 +161,6 @@ $("#btnComenzar").click(function startGame() {
                   setGanador(usuarioErrores.toString());
                 }
 
-
                 $(".img").off("click");
 
                 $("#alerts").html(msgWin + $("#errores").val());
@@ -161,8 +168,6 @@ $("#btnComenzar").click(function startGame() {
                 $("#alerts").removeClass("alert-danger");
                 $("#alerts").removeClass("alert-info");
                 $("#alerts").addClass("alert-success");
-
-               // location.reload();
               }
             } else {
               setTimeout(() => {
@@ -173,7 +178,6 @@ $("#btnComenzar").click(function startGame() {
                   $(seleccion1).attr("src", "img/dorso.jpg");
                   $(".audio")[2].play();
                 } else {
-                  
                   $(seleccion1).attr("src", "img/dorso.jpg");
                   $(seleccion2).attr("src", "img/dorso.jpg");
                   $(".audio")[2].play();
@@ -187,8 +191,27 @@ $("#btnComenzar").click(function startGame() {
                 $("#alerts").removeClass("alert-info");
                 $("#alerts").addClass("alert-danger");
 
-
                 contadorErr++;
+
+                if (dificultad == "leyenda") {
+                  if (contadorErr == 3) {
+                    $(".img").off("click");
+                    $( ".img" ).toggle( "highlight" )
+                    $("#alerts").html(
+                      "¡Has perdido! Has tenido tres errores en el modo leyenda..."
+                    );
+
+                    //Añadir un efecto
+                    $("#alerts").removeClass("alert-dark");
+                    $("#alerts").removeClass("alert-success");
+                    $("#alerts").removeClass("alert-info");
+                    $("#alerts").addClass("alert-danger");
+                    contadorErr = 0;
+                    setTimeout(() => {
+                      $( ".img" ).toggle( "highlight" )
+                    }, 3000);
+                  }
+                }
 
                 $("#errores").val(contadorErr);
               }, 500);
@@ -207,65 +230,121 @@ function setGanador(c) {
   $("#winner").html(arrGanador[0]);
 }
 
-function reinicio() {
-    
-    //Desordenamos el array
-    arrSrc.sort(function () {
-      return Math.random() - 0.5;
-    });
+function reinicio(dificultad) {
+  //En caso de reinicio, se eliminan errores y puntuación acumulada
+  $(".img").off("click");
+  contadorErr = 0;
+  $("#errores").val(contadorErr);
+  puntuacion = 0;
+  cambiarProgreso(puntuacion);
+  $("#marcador").val(puntuacion);
 
-    //Borramos los aciertos, se les pone el dorso a todas las cartas, se asigna la función a dar la vuelta y una es la bomba
-    for (let i = 0; i < arrCartas.length; i++) {
-      const carta = arrCartas[i];
+  //Desordenamos el array
+  arrSrc.sort(function () {
+    return Math.random() - 0.5;
+  });
 
-      $(carta).removeClass("sombreado");
-      $(carta).attr("src", "img/dorso.jpg");
+  //Borramos los aciertos, se les pone el dorso a todas las cartas, se asigna la función a dar la vuelta y una es la bomba
+  for (let i = 0; i < arrCartas.length; i++) {
+    const carta = arrCartas[i];
 
-      $(carta).click(function () {
-        $(this).attr("src", arrSrc[i]);
+    $(carta).removeClass("sombreado");
+    $(carta).attr("src", "img/dorso.jpg");
 
-        if (arrSrc[i] == "img/bomba.jpg") {
+    $(carta).removeData("bomba");
+    //  $(arrSrc[i]).removeData("bomba");
 
-          $(this).data("bomba", true); 
-        }
-      });
+    if (arrSrc[i] == "img/bomba.jpg") {
+      $(this).data("bomba", true);
+      $(carta).data("bomba", true);
     }
-    //En caso de reinicio, se eliminan errores y puntuación acumulada
-    contadorErr = 0;
-    $("#errores").val(contadorErr);
 
-    puntuacion = 0;
-    cambiarProgreso(puntuacion);
-    $("#marcador").val(puntuacion);
+    $(carta).click(function () {
+      $(this).attr("src", arrSrc[i]);
+    });
+  }
 
-    $("#alerts").html("Start!");
+  $("#alerts").html("Start!");
 
-    $("#alerts").removeClass("alert-success");
-    $("#alerts").removeClass("alert-danger");
-    $("#alerts").removeClass("alert-info");
-    $("#alerts").addClass("alert-dark");
+  $("#alerts").removeClass("alert-success");
+  $("#alerts").removeClass("alert-danger");
+  $("#alerts").removeClass("alert-info");
+  $("#alerts").addClass("alert-dark");
 
+  //Dificultad fácil
+  if (dificultad == "easy") {
+    $("#btnAyuda").css("display", "inherit");
+    $("#alerts").html("Ayuda utilizada, ¡no podrás usarla más!");
+    $("#btnAyuda").click(function () {
+      for (let i = 0; i < arrCartas.length; i++) {
+        const carta = arrCartas[i];
+        const fondo = arrSrc[i];
 
+        if ($(carta).hasClass("sombreado")) {
+        } else {
+          $(carta).attr("src", arrSrc[i]);
+          setTimeout(() => {
+            $(carta).attr("src", "img/dorso.jpg");
+          }, 2000);
+        }
+      }
+      $("#btnAyuda").css("display", "none");
+    });
+  }
 
+  //Dificultad media
+
+  if (dificultad == "medium") {
+    //Recorremos todas las cartas buscando la bomba
+
+    arrCartas.forEach((carta) => {
+      if ($(carta).data("bomba")) {
+        $(carta).attr("src", "img/bomba.jpg");
+
+        setTimeout(() => {
+          $(carta).attr("src", "img/dorso.jpg");
+        }, 2000);
+      }
+    });
+  }
+
+  //Difícil
+
+  if (dificultad == "hard") {
+    //Por defecto es dificil
+  }
+
+  //Leyenda
+  if (dificultad == "leyenda") {
+    arrCartas.forEach((carta) => {
+      if ($(carta).data("bomba")) {
+        $(carta).attr("src", "img/bomba.jpg");
+
+        setTimeout(() => {
+          $(carta).attr("src", "img/dorso.jpg");
+        }, 1000);
+      }
+    });
+  }
 }
 
-function bomba(){
-     //Dar la vuelta a las cartas porque se reinicia mediante la bomba
-     for (let i = 0; i < arrCartas.length; i++) {
-        const carta = arrCartas[i];
-  
-        $(carta).removeClass("sombredo");
-        $(carta).removeClass("sombreado");
-        $(carta).attr("src", "img/dorso.jpg");
-      }
-  
-      contadorErr++;
-      $("#errores").val(contadorErr);
-  
-      puntuacion = 0;
-      cambiarProgreso(puntuacion);
-      $("#marcador").val(puntuacion);
-      $(".tablero").effect("bounce", "fast");
+function bomba() {
+  //Dar la vuelta a las cartas porque se reinicia mediante la bomba
+  for (let i = 0; i < arrCartas.length; i++) {
+    const carta = arrCartas[i];
+
+    $(carta).removeClass("sombredo");
+    $(carta).removeClass("sombreado");
+    $(carta).attr("src", "img/dorso.jpg");
+  }
+
+  contadorErr++;
+  $("#errores").val(contadorErr);
+
+  puntuacion = 0;
+  cambiarProgreso(puntuacion);
+  $("#marcador").val(puntuacion);
+  $(".tablero").effect("bounce", "fast");
 }
 
 function cambiarProgreso(punt) {
