@@ -13,9 +13,19 @@ $(function () {
   });
 });
 
-if (localStorage.getItem("ganador")) {
-  let cookieganador = localStorage.getItem("ganador"); // El local storage lo dejamos igual con Jquery¿?
-  setGanador(cookieganador);
+if (localStorage.getItem("ganadores")) {
+  //Se establecen los ganadores del localstorage
+
+  setGanadores(JSON.parse(localStorage.ganadores));
+} else {
+  //Los ganadores por defecto se asignan
+  var arrGanadores = ["10&Carol", "20&Gabo", "30&Eve", "40&Palo", "50&Gramo"];
+
+  let ganadores = JSON.stringify(arrGanadores);
+
+  localStorage.setItem("ganadores", ganadores);
+
+  setGanadores(JSON.parse(localStorage.ganadores));
 }
 
 //Array de las cartas
@@ -94,10 +104,8 @@ $("#btnComenzar").click(function startGame() {
     $(element).click(function comparar(e) {
       if (seleccion1 == "") {
         seleccion1 = e.target;
-        console.log(seleccion1);
         if ($(seleccion1).data("bomba")) {
           $(".audio")[3].play();
-          $(seleccion1).removeData("bomba");
 
           setTimeout(() => {
             $(seleccion1).attr("src", "img/dorso.jpg");
@@ -115,7 +123,6 @@ $("#btnComenzar").click(function startGame() {
 
           if ($(seleccion2).data("bomba")) {
             $(".audio")[3].play();
-            $(seleccion2).removeData("bomba");
 
             setTimeout(() => {
               $(seleccion1).attr("src", "img/dorso.jpg");
@@ -151,15 +158,9 @@ $("#btnComenzar").click(function startGame() {
               if ($("#marcador").val() == 7) {
                 alert(msgWin + $("#errores").val());
 
-                var erroresGanador = parseInt($("#erroresGanador").val());
                 var erroresJugador = parseInt($("#errores").val());
 
-                if (erroresGanador >= erroresJugador) {
-                  var usuarioErrores = usuario + "&" + erroresJugador;
-                  console.log(usuarioErrores);
-                  localStorage.setItem("ganador", usuarioErrores.toString());
-                  setGanador(usuarioErrores.toString());
-                }
+                posicionarJugador(usuario, erroresJugador);
 
                 $(".img").off("click");
 
@@ -196,7 +197,7 @@ $("#btnComenzar").click(function startGame() {
                 if (dificultad == "leyenda") {
                   if (contadorErr == 3) {
                     $(".img").off("click");
-                    $( ".img" ).toggle( "highlight" )
+                    $(".img").toggle("highlight");
                     $("#alerts").html(
                       "¡Has perdido! Has tenido tres errores en el modo leyenda..."
                     );
@@ -208,7 +209,7 @@ $("#btnComenzar").click(function startGame() {
                     $("#alerts").addClass("alert-danger");
                     contadorErr = 0;
                     setTimeout(() => {
-                      $( ".img" ).toggle( "highlight" )
+                      $(".img").toggle("highlight");
                     }, 3000);
                   }
                 }
@@ -222,13 +223,6 @@ $("#btnComenzar").click(function startGame() {
     });
   });
 });
-
-function setGanador(c) {
-  let arrGanador = c.split("&");
-
-  $("#erroresGanador").val(arrGanador[1]);
-  $("#winner").html(arrGanador[0]);
-}
 
 function reinicio(dificultad) {
   //En caso de reinicio, se eliminan errores y puntuación acumulada
@@ -260,6 +254,10 @@ function reinicio(dificultad) {
     }
 
     $(carta).click(function () {
+      $(this).fadeOut(100, function () {
+        $(this).fadeIn(100);
+      });
+
       $(this).attr("src", arrSrc[i]);
     });
   }
@@ -351,6 +349,66 @@ function cambiarProgreso(punt) {
   $("#progress").css("width", arrProgress[punt]);
 }
 
+function setGanador(c) {
+  let arrGanador = c.split("&");
+
+  $("#erroresGanador").val(arrGanador[1]);
+  $("#winner").html(arrGanador[0]);
+}
+
+function setGanadores(g) {
+  let primero = g[0].split("&");
+  $("#winner").html(primero[1]);
+  $("#erroresGanador").val(primero[0]);
+
+  let segundo = g[1].split("&");
+  $("#segundo").html(segundo[1]);
+  $("#erroresSegundo").val(segundo[0]);
+
+  let tercero = g[2].split("&");
+  $("#tercero").html(tercero[1]);
+  $("#erroresTercero").val(tercero[0]);
+
+  let cuarto = g[3].split("&");
+  $("#cuarto").html(cuarto[1]);
+  $("#erroresCuarto").val(cuarto[0]);
+
+  let quinto = g[4].split("&");
+  $("#quinto").html(quinto[1]);
+  $("#erroresQuinto").val(quinto[0]);
+
+  localStorage.setItem("ganadores", JSON.stringify(g));
+}
+
+function posicionarJugador(usu, errores) {
+  var contador = 0;
+  var seguir = true;
+  var ganadores = JSON.parse(localStorage.ganadores);
+  ganadores.forEach((ganador) => {
+    //Recorremos el array de ganadores
+
+    var errorGanador = ganador.split("&"); // Por cada uno, sacamos los errores
+
+    if (errores <= parseInt(errorGanador[0]) && seguir) {
+      //Si los errores son menores o iguales que ese jugador
+
+      var cookieJugador = errores + "&" + usu;
+      ganadores.splice(contador, 0, cookieJugador); //Metemos el nuevo jugador en la posición que estaba este jugador "empuja el array"
+      ganadores.pop(); // eliminamos el último jugador del array para que sigan siendo 5, y lo guardamos en el local
+      setGanadores(ganadores);
+      seguir = false;
+    }
+
+    contador++;
+  });
+}
+
+/*if (erroresGanador >= erroresJugador) {
+  var usuarioErrores = usuario + "&" + erroresJugador;
+  localStorage.setItem("ganador", usuarioErrores.toString());
+  setGanador(usuarioErrores.toString());
+}*/
+
 if (!localStorage.getItem("idioma")) {
   idioma("ES");
 }
@@ -371,32 +429,25 @@ $("#btnEN").click(function () {
 });
 
 function idioma(idi) {
-  var xhr = new XMLHttpRequest();
-  xhr.onreadystatechange = function () {
-    if (this.readyState == 4 && this.status == 200) {
-      var myArr = JSON.parse(this.responseText);
-      cargarJSON(myArr, idi);
-    }
-  };
-  xhr.open("GET", "lang/lang.json", true);
-  xhr.send();
+
+  $.getJSON("lang/lang.json", function (respuesta) {
+    
+    var idioma = respuesta["LANGUAGE"][idi];
+
+    $("#score").html(idioma["SCORE"]);
+    $("#errors").html(idioma["ERRORS"]);
+    $("#topPlayer").html(idioma["TOP"]);
+    $("#topErr").html(idioma["ERRTOP"]);
+    $("#language").html(idioma["LANG"]);
+    $("#alerts").html(idioma["ALERTS"]);
+
+    msgRight = idioma["RIGHT"];
+    msgWrong = idioma["WRONG"];
+    msgWin = idioma["WIN"];
+
+    $("#desc").html(idioma["DESC"]);
+
+    localStorage.setItem("idioma", idi);
+  });
 }
 
-function cargarJSON(json, idi) {
-  var idioma = json["LANGUAGE"][idi];
-
-  $("#score").html(idioma["SCORE"]);
-  $("#errors").html(idioma["ERRORS"]);
-  $("#topPlayer").html(idioma["TOP"]);
-  $("#topErr").html(idioma["ERRTOP"]);
-  $("#language").html(idioma["LANG"]);
-  $("#alerts").html(idioma["ALERTS"]);
-
-  msgRight = idioma["RIGHT"];
-  msgWrong = idioma["WRONG"];
-  msgWin = idioma["WIN"];
-
-  $("#desc").html(idioma["DESC"]);
-
-  localStorage.setItem("idioma", idi);
-}
