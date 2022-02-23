@@ -249,7 +249,6 @@
 
 
         <footer class="justify-content-center mt-5">
-            <button id="getJSON">getJSON</button>
             Gabriel Navalón Soriano --- MTGMemoryGame
         </footer>
     
@@ -268,6 +267,9 @@
     </audio>
     <audio class="audio">
         <source src="audio/bomba.mp3" type="audio/ogg">
+    </audio>
+    <audio class="audio">
+        <source src="audio/gameover.mp3" type="audio/ogg">
     </audio>
 
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -294,7 +296,11 @@
 
                     <input type="radio" class="btn-check" name="dificultad" id="dark-outlined" autocomplete="off"
                         value="leyenda">
-                    <label class="btn btn-dark" for="dark-outlined">Leyenda</label>
+                    <label class="btn btn-dark" for="dark-outlined">Leyenda</label> <br><br>
+
+                    <button type="button" id="btnInfiltrado" class="btn btn-primary"
+                    data-bs-dismiss="modal">Jugar Infiltrado</button>
+
 
                     <p>(La dificultad por defecto es la media)</p>
 

@@ -66,6 +66,24 @@ const arrSrc = [
   "img/bomba.jpg",
 ];
 
+const arrInf = [
+  "img/mtg1.jpg",
+  "img/mtg2.jpg",
+  "img/mtg3.jpg",
+  "img/mtg4.jpg",
+  "img/mtg5.jpg",
+  "img/mtg6.jpg",
+  "img/mtg1.jpg",
+  "img/mtg2.jpg",
+  "img/mtg3.jpg",
+  "img/mtg4.jpg",
+  "img/mtg5.jpg",
+  "img/mtg6.jpg",
+  "img/espia1.png",
+  "img/espia2.jpg",
+  "img/espia3.png",
+];
+
 const arrProgress = [
   "0%",
   "14.27%",
@@ -201,8 +219,7 @@ $("#btnComenzar").click(function startGame() {
                     $("#alerts").html(
                       "¡Has perdido! Has tenido tres errores en el modo leyenda..."
                     );
-
-                    //Añadir un efecto
+                    $(".audio")[4].play();
                     $("#alerts").removeClass("alert-dark");
                     $("#alerts").removeClass("alert-success");
                     $("#alerts").removeClass("alert-info");
@@ -223,6 +240,8 @@ $("#btnComenzar").click(function startGame() {
     });
   });
 });
+
+
 
 function reinicio(dificultad) {
   //En caso de reinicio, se eliminan errores y puntuación acumulada
@@ -246,6 +265,7 @@ function reinicio(dificultad) {
     $(carta).attr("src", "img/dorso.jpg");
 
     $(carta).removeData("bomba");
+    $(carta).removeData("infiltrado");
     //  $(arrSrc[i]).removeData("bomba");
 
     if (arrSrc[i] == "img/bomba.jpg") {
@@ -431,7 +451,7 @@ $("#btnEN").click(function () {
 function idioma(idi) {
 
   $.getJSON("lang/lang.json", function (respuesta) {
-    
+
     var idioma = respuesta["LANGUAGE"][idi];
 
     $("#score").html(idioma["SCORE"]);
@@ -450,4 +470,134 @@ function idioma(idi) {
     localStorage.setItem("idioma", idi);
   });
 }
+
+$('#btnInfiltrado').click(function infiltrado() {
+
+  $("#btnStart").off();
+  $("#btnStart").css("display", "none");
+
+  $("#btnReplay").css("display", "inherit");
+
+  usuario = $("#usuario").val();
+  $("#usu").html(usuario);
+
+  //En caso de reinicio, se eliminan errores y puntuación acumulada
+  $(".img").off("click");
+  contadorErr = 0;
+  $("#errores").val(contadorErr);
+  puntuacion = 0;
+  cambiarProgreso(puntuacion);
+  $("#marcador").val(puntuacion);
+
+  //Desordenamos el array
+  arrInf.sort(function () {
+    return Math.random() - 0.5;
+  });
+
+  //Borramos los aciertos, se les pone el dorso a todas las cartas, se asigna la función a dar la vuelta y una es la bomba
+  for (let i = 0; i < arrCartas.length; i++) {
+    const carta = arrCartas[i];
+
+    $(carta).removeClass("sombreado");
+    $(carta).attr("src", "img/dorso.jpg");
+
+    $(carta).removeData("bomba");
+    $(carta).removeData("infiltrado");
+
+    if (arrInf[i] == "img/espia2.jpg" || arrInf[i] == "img/espia1.png" || arrInf[i] == "img/espia3.png") {
+      $(this).data("infiltrado", true);
+      $(carta).data("infiltrado", true);
+    }
+
+
+    $(carta).click(function () {
+      $(this).fadeOut(100, function () {
+        $(this).fadeIn(100);
+      });
+
+      $(this).attr("src", arrInf[i]);
+    });
+
+    $("#alerts").html("Start!");
+
+    $("#alerts").removeClass("alert-success");
+    $("#alerts").removeClass("alert-danger");
+    $("#alerts").removeClass("alert-info");
+    $("#alerts").addClass("alert-dark");
+
+    
+  }
+
+  for (let i = 0; i < arrCartas.length; i++) {
+        const carta = arrCartas[i];
+        const fondo = arrInf[i];
+
+        if ($(carta).hasClass("sombreado")) {
+        } else {
+          $(carta).attr("src", arrInf[i]);
+          setTimeout(() => {
+            $(carta).attr("src", "img/dorso.jpg");
+          }, 2000);
+        }
+      }
+
+  arrCartas.forEach((element) => {
+    $(element).click(function busqueda(e) {
+      seleccion1 = e.target;
+      $(".audio")[0].play();  
+      if ($(seleccion1).data("infiltrado")) {
+
+        $(seleccion1).addClass("sombreado");
+        $(".audio")[1].play();
+
+        seleccion1 = "";
+        seleccion1 = "";
+        seleccion2 = "";
+
+        puntuacion++;
+
+       
+
+        $("#alerts").html(msgRight);
+        $("#alerts").removeClass("alert-dark");
+        $("#alerts").removeClass("alert-danger");
+        $("#alerts").addClass("alert-info");
+        $("#marcador").val(puntuacion);
+
+
+        if (puntuacion == 3) {
+          alert(msgWin + $("#errores").val());
+          $(".img").off("click");
+
+          $("#alerts").html("¡Has encontrado a todos los espías!");
+          $("#alerts").removeClass("alert-dark");
+          $("#alerts").removeClass("alert-danger");
+          $("#alerts").removeClass("alert-info");
+          $("#alerts").addClass("alert-success");
+        }
+
+      } else {
+        
+            $(".img").off("click");
+
+            $(".audio")[4].play();
+
+            $("#alerts").html(
+              "¡Has perdido! No has encontrado a los infiltrados..."
+            );
+
+            //Añadir un efecto
+            $("#alerts").removeClass("alert-dark");
+            $("#alerts").removeClass("alert-success");
+            $("#alerts").removeClass("alert-info");
+            $("#alerts").addClass("alert-danger");
+            contadorErr = 0;
+
+           
+
+      }
+    });
+  });
+
+});
 
