@@ -4,7 +4,7 @@ console.clear();
 enum Profesion {
   Pintor ,
   Programador  ,
-  Panadero '
+  Panadero
 };
 
 
