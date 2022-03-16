@@ -1,0 +1,43 @@
+<h1>Ejercicio 1 : {{title}}</h1>
+<p class="prueba_color">Hola</p>
+<p class="prueba_color">{{descripcion}}</p>
+
+<div [hidden]="estaOculto">
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis odit magnam quis omnis doloribus sint magni commodi
+  provident non hic. Nihil atque a sint ipsa doloribus rem sit voluptas dolorem.
+</div>
+
+
+<select name="vehiculo" id="">
+  <option  value="coche">Coche</option>
+  <option [selected]="estaSeleccionado" value="moto">Moto</option>
+  <option value="camion">Camion</option>
+</select>
+
+<input type="radio" value="option1" name="option1" > Coche
+<input type="radio" value="option1" name="option1" [checked]="estaSeleccionado"> Moto
+
+
+<br><br><br><br>
+
+Opciones: {{ opcionMarcada }} <br><br>
+<input type="radio" value="Opcion1" name="opcion" (click)="setOption($event)"> Opcion1
+<input type="radio" value="Opcion2" name="opcion" (click)="setOption($event)"> Opcion2
+
+
+<br><br><br><br>
+<div (click)="saludar()">
+  <button (click)="saludar2($event)">Heeey</button>
+</div>
+
+<br><br><br><br>
+
+<input type="text" #textoInput> <br><br>
+{{textoParrafo}} <br><br>
+<button (click)="saludar3(textoInput.value)"> Saludar 3</button>
+
+<br><br><br><br>
+
+<p>Tu nombre es: {{nombre}}</p>
+
+<input type="text" [(ngModel)]="nombre">

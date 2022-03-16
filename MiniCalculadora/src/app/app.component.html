@@ -1,0 +1,49 @@
+<h1>Calculadora</h1>
+
+<input type="number" [(ngModel)]="op1" > <br>
+
+<button (click)="sumar()">Sumar </button>
+<button (click)="restar()">Restar </button>
+<button (click)="multiplicar()">Multiplicar </button><br>
+
+<input type="number" [(ngModel)]="op2"> <br>
+
+=
+
+{{resultado}}
+
+<hr>
+
+<input type="text" [(ngModel)]="nombre">
+
+<button (click)="setNombre()">Poner Nombre</button>
+
+<h1 [class.nombreEspecial]="esNombreEspecial()">{{nombre}}</h1>
+<h1 [ngClass] ="{'nombreEspecial': esNombreEspecial(), nombreNormal: esNombreNormal()}" >{{nombre}}</h1>
+
+<h1 [style.color]="color">AHHHHH</h1>
+<h1 *ngIf="nombre == 'Paco'; else Sinnombre">{{nombre}}</h1>
+
+<ng-template #Sinnombre>
+  <h1>No hay ningún nombre</h1>
+</ng-template>
+
+<ul>
+  <li *ngFor="let nombreFor of nombres; let i = index; let esPar = even; let esImpar = odd;
+  let esPrimero = first; let esUltimo = last ">{{i}} -- {{nombreFor}}
+    <span *ngIf="esPar">Es par </span>
+    <span *ngIf="esImpar">Es impar </span>
+    <span *ngIf="esPrimero">Es primero </span>
+    <span *ngIf="esUltimo">Es último </span>
+  </li>
+
+</ul>
+
+
+<div [ngSwitch]="nombres.length">
+    <p>{{nombres.length}}</p>
+    <p *ngSwitchCase="0">No hay ningún nombre</p>
+    <p *ngSwitchCase="4">Hay cuatro nombres</p>
+    <p *ngSwitchDefault> Hay muchos nombres</p>
+</div>
+

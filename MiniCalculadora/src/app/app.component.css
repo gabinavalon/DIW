@@ -1,0 +1,15 @@
+.miLista {
+  font-size: large;
+  color: blue;
+}
+
+.nombreEspecial{
+  text-decoration: underline;
+  font-weight: bold;
+  color: green;
+}
+
+.nombreNormal{
+  font-family: 'Times New Roman', Times, serif;
+  border: 1px solid black;
+}

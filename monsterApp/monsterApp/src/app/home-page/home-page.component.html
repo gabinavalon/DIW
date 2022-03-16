@@ -1,0 +1,23 @@
+<div class="container">
+  <h1>{{title}}</h1> <br>
+  Nombre: <input type="text" name="nombre" [(ngModel)]="nombreMonstruo"> <br> <br>
+  Vida: <input type="number" name="vida" [(ngModel)]="vidaMonstruo"> <br> <br>
+  Ataque: <input type="number" name="ataque" [(ngModel)]="ataqueMonstruo"> <br> <br>
+
+  Raza: <select name="raza" [(ngModel)]="razaMonstruo" (change)="asignarRaza()">
+    <option value="Orco">Orco</option>
+    <option value="Elfo">Elfo</option>
+    <option value="Enano">Enano</option>
+    <option value="Trasgo">Trasgo</option>
+  </select>
+  <br>
+  <br>
+  <button (click)="addMonster()"> Add Monster </button> <br><br><br>
+  <div class="row">
+    <div class="alert alert-danger" *ngIf="misMonstruos.length == 0">
+      No hay monstruos en la base de datos
+    </div>
+    <app-monster-c *ngFor="let monstruo of misMonstruos;" [monstruoEnviado]="monstruo" class="col-sm-3 mb-2"></app-monster-c>
+  </div>
+
+</div>

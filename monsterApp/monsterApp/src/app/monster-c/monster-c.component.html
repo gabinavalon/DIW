@@ -1,0 +1,13 @@
+<div>
+  <div class="card" style="width: 15rem;">
+    <div class="card-body list-group-item-danger"
+      [ngClass]="{'list-group-item-danger': monstruoEnviado.isHorda(), 'list-group-item-primary': monstruoEnviado.isAlianza()}">
+      <h5 class="card-title">{{monstruoEnviado.nombre}}</h5>
+      <h6 class="card-subtitle mb-2 text-muted">{{monstruoEnviado.raza}}</h6>
+      <ul class="list-group list-group-flush">
+        <li class=" list-group-item"> <span class="badge bg-success">{{monstruoEnviado.vida}}</span> PS</li>
+        <li class=" list-group-item"> <span class="badge bg-danger">{{monstruoEnviado.ataque}}</span> ATK</li>
+      </ul>
+    </div>
+  </div>
+</div>

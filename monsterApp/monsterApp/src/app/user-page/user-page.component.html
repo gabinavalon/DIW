@@ -1,0 +1,24 @@
+<hr>
+<div *ngIf="users" class="row">
+
+  <div *ngFor="let user of users.data;" class="col-4">
+    {{user.email}} <br>
+    {{user.first_name}} <br>
+    {{user.last_name}} <br>
+    <img src='{{user.avatar}}' alt="">
+  </div>
+</div>
+<hr>
+<div *ngIf="users" class="row">
+
+  <div *ngFor="let res of resources.data;" class="col-4" [ngStyle]='{"background-color": res.color}' >
+
+
+      Nombre: {{res.name}} <br>
+      Año: {{res.year}} <br>
+      Color: {{res.color}}
+
+
+  </div>
+</div>
+
